@@ -1,0 +1,29 @@
+ session_start() si hay una sesion abierta la recupera y si no la crea
+ funcion setcookie() en las cabeceras
+ primer parametro nombre de la cookie obligatorio
+ segundo parametro opcional valor
+ tercer parametro fecha que expira opcional  tiem()+3600*24
+ para cerrar al final setcookie (cookie, tiempo negativo time() -4200) 
+ session_destroy()
+
+ para borrar sólo una cosa de las cookies unset($_SESSION['cesta']
+
+ if usuario y pass ok
+ $_SESSION['username'] = $username
+
+ si el usuario no se ha logueado if isset($_SESSION['username']
+ else header(Location: login.php
+
+ el valor de las cookies valen para la segunda vea que accedo
+
+ejemplo:
+
+if(!isset($_COOKIE['contador'])){
+    setcookie('contador', '1', time() + 3600 * 24);
+    echo "Bienvenido por primera vez";
+} else {
+    $contador = (int) $_COOKIE['contador'];
+    $contador++;
+    setcookie('contador', $contador, time() + 3600 * 24);
+    echo "Bienvenido por $contador vez";
+}

@@ -1,0 +1,18 @@
+h1 {margin-bottom:0;}
+#encabezado {background-color:#ddf0a4;}
+#contenido {background-color:#EEEEEE;height:355px;}
+#parte2 {background-color:gold;height:355px;}
+#pie
+{background-color:#ddf0a4;color:#ff0000;}
+th[colspan="3"] {
+    text-align: center;
+    text-transform: uppercase;
+}
+label, h4 {
+    text-align: center;
+} 
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
