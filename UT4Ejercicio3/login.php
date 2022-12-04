@@ -81,6 +81,7 @@ $mensaje_conexion = "<p>Conexión realizada con éxito</p>";
             </fieldset>
         </form>
     </div>
+        <script src="script.js"></script>
 </body>
 </html>
 </html>
