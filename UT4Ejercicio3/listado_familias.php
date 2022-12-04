@@ -58,9 +58,7 @@ $mensaje_conexion = "<p>Conexión realizada con éxito</p>";
     <header>
         <div class="alert alert-info"><?= $mensaje_conexion ?></div>
         <div class="alert alert-info"><?= $mensaje ?></div>
-        <!-- Migas de pan -->
-        <p><a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]) ?>">Familias ></a></p> 
-    </header>
+       </header>
 
     <div id="contenedor">
         <div id="encabezado">
@@ -132,7 +130,11 @@ endif; ?>
 
         <br class="divisor" />
         <div id="pie">
-
+        <!-- Migas de pan -->
+        <p><a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]) ?>">Familias ></a></p> 
+        <!-- Cerrar sesión -->
+        <p><a href="<?=  htmlspecialchars('./logout.php') ?>">Cerrar Sesión</a></p> 
+    
 
         </div>
     </div>

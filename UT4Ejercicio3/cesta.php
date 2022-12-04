@@ -27,10 +27,7 @@ $total = 0;
     </head>
     <body>
     <body class="pagproductos">
-        <header>
-            <!-- Migas de pan -->
-            <p><a href="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>">Cesta ></a></p> 
-        </header>
+        
 
         <div id="contenedor">
             <div id="encabezado">
@@ -92,6 +89,13 @@ if ($cesta_vacia):
 
             <br class="divisor" />
             <div id="pie">
+                
+                <p><!-- Migas de pan -->
+                    <a href="<?=  htmlspecialchars('./listado_familias.php') ?>">Familias ></a>
+                    <a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]) ?>"> Cesta ></a>
+                </p>
+                <!-- Cerrar sesión -->
+                <p><a href="<?=  htmlspecialchars('./logout.php') ?>">Cerrar Sesión</a></p> 
 
 
             </div>
