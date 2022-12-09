@@ -6,68 +6,16 @@ comprobarSesion();
 
 
 // Recuperamos la cesta de la compra
-if(isset($_SESSION['cesta'])){
-    
-    $cesta = $_SESSION['cesta'];
-    
-    if(count($cesta)>0){
-        $cesta_vacia = false;
-    } else {
-        $cesta_vacia = true;
-    }
-    
-} else { // si no está definida, la creamos
-    $cesta = [];
-    $_SESSION['cesta'] = $cesta;
-    $cesta_vacia = true;
-}
-
-// Comprobamos si se ha enviado el formulario de vaciar la cesta
-if(isset($_POST['vaciar'])){
-    $cesta = [];
-    $_SESSION['cesta'] = $cesta;
-    $cesta_vacia = true;
-}
+$cesta = cargarCesta ();
+$cesta_vacia = cestaVacia ($cesta);
 
 
 // Comprobamos si se ha enviado el formulario de vaciar la cesta
-if (isset($_REQUEST['vaciar'])){
-    $mensaje_vaciada = "Cesta vaciada con éxito";
-} else {
-    $mensaje_vaciada = '';
-}
+$cesta_vacia = vaciarCesta ($cesta);
 
 // Comprobamos si se ha enviado el formulario de añadir
-if(isset($_POST['add'])){
-    $cod = $_POST['cod'];
-    $nombre = $_POST['nombre'];
-    $pvp = $_POST['pvp'];
-    $familia = $_POST['familia'];
-    $unidades = 1;
-    $producto = ['cod' => $cod, 
-                    'nombre' => $nombre, 
-                    'pvp' => $pvp  , 
-                    'unidades' => $unidades , 
-                    'familia'=> $familia ];
-    // Comprobamos si el producto existe ya en la cesta
-    if( (!$cesta_vacia) && array_key_exists($cod, $cesta)){
-        //sumamos a las unidades
-        $cesta[$cod]['unidades']++;
-        $unidades = $cesta[$cod]['unidades'];
-        // actualizamos la sesión
-        $_SESSION['cesta']= $cesta;
-    } else {
-        // Actualizar cesta
-        $cesta[$cod] = ['nombre' => $nombre, 
-                    'pvp' => $pvp  , 
-                    'unidades' => $unidades , 
-                    'familia'=> $familia];
-        $cesta_vacia = false;
-        // actualizar sesión
-        $_SESSION['cesta']= $cesta;
-    }
-    
-}
+$cesta = addProducto($cesta);
+$cesta_vacia = cestaVacia ($cesta);
 
 // Obtenemos los datos necesarios de la BD
 $msql = "mysql:dbname=dwes2;host=127.0.0.1";
@@ -106,7 +54,6 @@ $mensaje_conexion = "<p>Conexión realizada con éxito</p>";
     <body class="pagproductos">
     <header>
         <div class="alert alert-info"><?= $mensaje_conexion ?></div>
-        <div class="alert alert-info"><?= $mensaje_vaciada ?></div>
     </header>
 
     <div id="contenedor">

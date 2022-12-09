@@ -5,12 +5,16 @@ require_once './funciones.php';
 comprobarSesion();
 
 // Recuperamos la cesta de la compra
-$cesta = cargarCesta ();
-$cesta_vacia = cestaVacia ($cesta);
-
-// Si se han actualizado las unidades
-cambiarUnidades($cesta);
-$cesta_vacia = cestaVacia ($cesta);
+if (isset($_SESSION['cesta'])) {
+    $cesta = $_SESSION['cesta'];
+    if (count($cesta) > 0) {
+        $cesta_vacia = false;
+    } else {
+        $cesta_vacia = true;
+    }
+} else {
+    $cesta_vacia = true;
+}
 $total = 0;
 ?>
 <!DOCTYPE html>
@@ -48,7 +52,7 @@ if ($cesta_vacia):
                                 <th>Código</th>
                                 <th>Nombre</th>
                                 <th colspan="2">Precio</th>
-                                <th colspan="3">Unidades</th>
+                                <th>Unidades</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,14 +61,9 @@ if ($cesta_vacia):
                                     <td><?= $key ?></td>
                                     <td><?= $value['nombre'] ?></td>
                                     <td><?= $value['pvp'] ?></td>
-                                    <td> x </td>
-                        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
-                                    <td><input type="hidden" name="cod" value="<?= $key ?>"/></td>
-                                    <td><input type="text" name="unidades_cambiadas" value="<?= $value['unidades'] ?>"/></td>
-                                    <td><input type='submit' name="cambiar_unidades" value="Cambiar"></td>
+                                    <td>x</td>
+                                    <td><?= $value['unidades'] ?></td>
                                 </tr>
-                        </form>
-
         <?php $total = $total + ($value['unidades'] * $value['pvp']); ?>
                             <?php endforeach; ?>
                         </tbody>

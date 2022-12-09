@@ -9,28 +9,13 @@ $user = 'dwes2';
 $pass = 'abc123.';
 
 // Recuperamos la cesta de la compra
-    if(isset($_SESSION['cesta'])){
-        $cesta = $_SESSION['cesta'];
-        if(count($cesta)>0){
-            $cesta_vacia = false;
-            
-        } else {
-            $cesta_vacia = true;
-        }
-    } else {
-        $cesta_vacia = true;
-    }
+$cesta = cargarCesta ();
+$cesta_vacia = cestaVacia ($cesta);
+
     
-    // Comprobamos si se ha enviado el formulario de vaciar la cesta
-    if (isset($_REQUEST['vaciar'])){
-        $cesta = [];
-        $_SESSION['cesta'] = $cesta;
-        $cesta_vacia= true;
-        $mensaje = "Cesta vaciada con éxito";
-    } else {
-        $mensaje = '';
-    }
-    
+// Comprobamos si se ha enviado el formulario de vaciar la cesta
+$cesta_vacia = vaciarCesta ($cesta);
+$cesta_vacia = cestaVacia ($cesta);
     
 try {
     $pdo = new PDO($msql, $user, $pass);
@@ -57,7 +42,6 @@ $mensaje_conexion = "<p>Conexión realizada con éxito</p>";
     <body class="pagproductos">
     <header>
         <div class="alert alert-info"><?= $mensaje_conexion ?></div>
-        <div class="alert alert-info"><?= $mensaje ?></div>
        </header>
 
     <div id="contenedor">

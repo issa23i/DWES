@@ -183,3 +183,6 @@ table{
 input[type="submit"]{
     margin: 6px 100px;
 }
+input[name='add']{
+    margin: 6px 10px!important;
+}
