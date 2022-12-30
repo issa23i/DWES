@@ -49,6 +49,7 @@ if ($cesta_vacia):
                                 <th>Nombre</th>
                                 <th colspan="2">Precio</th>
                                 <th colspan="3">Unidades</th>
+                                <th>Importe</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,7 +61,8 @@ if ($cesta_vacia):
                                     <td> x </td>
                         <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
                                     <td><input type="hidden" name="cod" value="<?= $key ?>"/></td>
-                                    <td><input type="text" name="unidades_cambiadas" value="<?= $value['unidades'] ?>"/></td>
+                                    <td><input type="number" name="unidades_cambiadas" value="<?= $value['unidades'] ?>"/></td>
+                                    <td> <?=($value['unidades'] * $value['pvp']); ?> </td>
                                     <td><input type='submit' name="cambiar_unidades" value="Cambiar"></td>
                                 </tr>
                         </form>

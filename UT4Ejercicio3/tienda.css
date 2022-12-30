@@ -186,3 +186,6 @@ input[type="submit"]{
 input[name='add']{
     margin: 6px 10px!important;
 }
+td,th{
+    text-align: center;
+}

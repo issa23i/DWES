@@ -22,8 +22,8 @@ try {
     
     // Obtenemos los datos necesarios de la BD
     $query_listado_familias = 'SELECT cod, nombre FROM familia';
-    $resultado_listaddo_familias = $pdo->query($query_listado_familias);
-    $listado_familias = $resultado_listaddo_familias->fetchAll(PDO::FETCH_ASSOC);
+    $resultado_listado_familias = $pdo->query($query_listado_familias);
+    $listado_familias = $resultado_listado_familias->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $exc) {
     $mensaje_conexion = "<p>Falló la conexión" . $exc->getMessage() . "</p>";
 }

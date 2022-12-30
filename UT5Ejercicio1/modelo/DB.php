@@ -99,8 +99,13 @@ class DB {
     }
     
     public static function detalle_tv($cod_producto) {
-        $query = ""
-        
+        $query = "SELECT cod, nombre FROM televisor JOIN producto WHERE televisor.cod = producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel WHERE producto.cod = $cod_producto";
+        try{
+            $pdo_st = self::ejecuta_consulta($query);
+            
+        } catch (Exception $ex) {
+
+        }
     }
     
     public static function detalle_sobremesa($cod_producto) {
