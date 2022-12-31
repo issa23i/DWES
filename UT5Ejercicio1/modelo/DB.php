@@ -39,9 +39,9 @@ class DB {
         $query = 'SELECT cod, nombre FROM familia';
         $familias = [];
         try{
-            $pdo_st = self::ejecuta_consulta($query);
-            if( ($pdo_st->rowCount()) > 0 ){
-               foreach ($pdo_st as $row) {
+            $resultado = self::ejecuta_consulta($query);
+            if( ($resultado->rowCount()) > 0 ){
+               foreach ($resultado as $row) {
                 $familias[] = new Familia($row);
             }
             return $familias; 
@@ -56,9 +56,9 @@ class DB {
         $query = 'SELECT cod, nombre_corto, descripcion, PVP, familia FROM producto WHERE familia = :familia';
         $array_familia = array(':familia' => $cod_familia );
         try{
-            $pdo_st = self::ejecuta_consulta($query,$array_familia);
-            if( ($pdo_st->rowCount()) > 0 ){
-               foreach ($pdo_st as $row) {
+            $resultado = self::ejecuta_consulta($query,$array_familia);
+            if( ($resultado->rowCount()) > 0 ){
+               foreach ($resultado as $row) {
                     $productos[] = new Producto($row);
             }
             return $productos; 
@@ -73,22 +73,22 @@ class DB {
         $query = 'SELECT cod, nombre_corto, descripcion, PVP, familia FROM producto WHERE cod= :cod';
         $array_cod = array(':cod' => $cod_producto);
         try{
-            $pdo_st = self::ejecuta_consulta($query,$array_cod);
+            $resultado = self::ejecuta_consulta($query,$array_cod);
             if( ($pdo_st->rowCount()) == 1 ){
-                $producto = new Producto($pdo_st);
-                return $producto;
+                $producto = new Producto($resultado);
             }
         } catch (Exception $ex) {
             throw $ex;
         }
+        return $producto;
     }
     
     public static function verifica_cliente($usuario,$password){
         $query = "SELECT * FROM `usuarios` WHERE usuario = :nombre_usuario AND password =  :clave_usuario";
         $array_usuario = array(':nombre_usuario' => $usuario, ':clave_usuario' => $password);
         try{
-            $pdo_st = self::ejecuta_consulta($query,$array_usuario);
-            if( ($pdo_st->rowCount())>0 ){
+            $resultado = self::ejecuta_consulta($query,$array_usuario);
+            if( ($resultado->rowCount())>0 ){
                 return true;
             } else {
                 return false;
@@ -98,18 +98,32 @@ class DB {
         }
     }
     
-    public static function detalle_tv($cod_producto) {
-        $query = "SELECT cod, nombre FROM televisor JOIN producto WHERE televisor.cod = producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel WHERE producto.cod = $cod_producto";
+    public static function obtiene_tv($cod_producto) {
+        $tv;
+        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel FROM televisor INNER JOIN producto WHERE producto.cod = televisor.cod AND producto.cod = $cod_producto";
         try{
-            $pdo_st = self::ejecuta_consulta($query);
-            
+            $resultado = self::ejecuta_consulta($query);
+            if( ($resultado->rowCount()>0)){
+                $tv = new Televisor($resultado);
+            }
         } catch (Exception $ex) {
-
+            throw $ex;
         }
+        return $tv;
     }
     
-    public static function detalle_sobremesa($cod_producto) {
-        
+    public static function obtiene_sobremesa($cod_producto) {
+        $sobremesa;
+        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, sobremesa.marca, sobremesa.modelo, sobremesa.procesador, sobremesa.ram, sobremesa.rom, sobremesa.extras FROM producto INNER JOIN sobremesa WHERE producto.cod = sobremesa.cod AND producto.cod = $cod_producto";
+        try {
+            $resultado = self::ejecuta_consulta($query);
+            if( ($resultado->rowCount()>0)){
+                $sobremesa = new Sobremesa($resultado);
+            }
+        } catch (Exception $exc) {
+            throw $exc;
+        }
+        return $sobremesa;
     }
 
 }
