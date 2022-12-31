@@ -7,16 +7,6 @@ clase DB (base de datos)
         OBTIENE_PRODUCTO(COD_PRO) -- (DEVUELVE EL OBJETO PRODUCTO)
         VERIFICA_CLIENTE(USUARIO,PASSWORD) -- (DEVUELVE BOOLEANO SI LOGUEA O NO)
         EJECUTA_CONSULTA() -- PRIVADA 
-        DETALLE(COD_PRO) -- (DEVUELVE UN OBJETO PRODUCTO_DETALLE que es un array assoc cod_pro->detalles)
-                // Crea un método en la clase DB que devuelva una instancia de 
-                    la clase que hereda de producto
-                    y reciba como parámetro el código del producto. 
-                    Para generar el objeto se le pasa al constructor un array asociativo 
-                    cuyas claves sean los nombres de las columnas de la nueva tabla 
-                    y de la tabla producto. En el constructor se inicializan los atributos propios 
-                    de la clase hija y se llama al constructor de la clase padre (Producto) 
-                    pasándole el mismo array asociativo. 
-
         OBTIENETV(COD) PUBLICO Y ESTATICO -- (DEVUELVE UN OBJETO TV)
 
 
