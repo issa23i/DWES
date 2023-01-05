@@ -48,13 +48,12 @@ clase PRODUCTO_DETALLE (Ejemplo TV) hija PRODUCTO (extends)
 
 clase CESTACOMPRA
     ATRIBUTOS 
-        CÓDIGO PRODUCTO
-        UNIDADES
+        ARRAY PRODUCTOS Y UNIDADES
     METODOS
-        CARGA_ARTÍCULO(COD_PRO , UNIDADES) -- (CARGA EN LA CESTA THIS EL ARTÍCULO , SI EXISTE, SUMA UNA UNIDAD
-        GET_PRODUCTOS() -- DEVUELVE UN ARRAY CON LA CESTA THIS KEY COD - VALUE PRODUCTO (OBJETO)
+        CARGA_ARTÍCULO(COD_PRO , UNIDADES) -- (CARGA EN LA CESTA THIS EL ARTÍCULO , SI EXISTE, SUMA LAS UNIDADES
+        GET_PRODUCTOS() -- DEVUELVE UN ARRAY CON LA CESTA THIS KEY COD - VALUE PRODUCTO (OBJETO), unidades
         GET_COSTE() -- DEVUELVE UN ENTERO CON EL TOTAL DE LA CESTA
-        GET_FAMILIA(COD_FAMILIA) -- DEVUELVE EL OBJETO
+        GET_FAMILIA(COD_PRO) -- DEVUELVE EL CODIGO DE FAMILIA
         ELIMINAR_PRODUCTO(COD_PRO) -- BORRA UN ARTÍCULO DE LA CESTA THIS
             Lo primero que debe hacer es comprobar que los parámetros código de producto y unidades a modificar estén presentes en la cesta.  
             Primero comprueba si el código del producto ya existe en el array. Si existe, se resta unidades al valor existente. Si el valor resultante es menor o igual que cero, se elimina ese producto del array.
@@ -105,36 +104,3 @@ recomendaciones
 MÉTODOS ESTÁTICOS
     NOMBRECLASE::NOMBREMÉTODO
 serialize() / unserialize() -- se puede almacenar en session o bbdd
-
-AYUDA
-    class Producto {
-        public $codigo;
-        public $nombre;
-        public $nombre_corto;
-        public $PVP;
-        public function muestra() {
-            print "<p>" . $this->codigo . "</p>";
-        }
-        public function __construct($row) {
-            $this->codigo = $row['cod'];
-            $this->nombre = $row['nombre'];
-            $this->nombre_corto = $row['nombre_corto'];
-            $this->PVP = $row['PVP'];
-        }
-    }
-
-    class TV extends Producto {
-    public $pulgadas;
-    public $panel;
-    public function muestra() {
-        print "<p>" . $this->pulgadas . " pulgadas</p>";
-    }
-    public function __construct($row) {
-    parent::__construct($row);
-        $this->pulgadas = $row['pulgadas'];
-        $this->panel = $row['panel'];
-    }
-
-
-
-// sesiones

@@ -29,10 +29,6 @@ class Producto {
         return $this->codigo;
     }
 
-    public function getNombre_corto() {
-        return $this->nombre_corto;
-    }
-
     public function getPVP() {
         return $this->PVP;
     }
