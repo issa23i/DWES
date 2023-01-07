@@ -1,4 +1,5 @@
-<?php require_once '../controlador/listado_productos.php';?>
+<?php require_once '../controlador/listado_productos.php';
+require_once '../modelo/Televisor.php';?>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -99,8 +100,13 @@ endif; ?>
                             <td><?= $producto->mostrar_nombre() ?> </td>
                             <td><?= $producto->getPVP() ?> </td>
                             <td>
-                                <form action='<?= htmlspecialchars("vista_detalle.php") ?>' method='post'>
-                                    <input type="submit" name='detalle' value="Detalle"/>
+                                <form action='<?= htmlspecialchars("vista_detalle.php?familia=$cod_familia") ?>' method='post'>
+                                    <input type="hidden" name="cod_pro" value="<?= $producto->getCodigo() ?>"/>
+                                    <!-- Si no es TV o ORDENA, el botón estará deshabilitado -->
+                                    <input type="submit" name='detalle' value="Detalle"
+                                    <?php if( $cod_familia!='TV' && $cod_familia!='ORDENA'): ?>
+                                        disabled='true'
+                                    <?php endif; ?>/>
                                 </form>
                             </td>
                         </tr>

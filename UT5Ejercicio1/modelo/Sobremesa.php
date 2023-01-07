@@ -1,11 +1,10 @@
 <?php
-
 /**
  * Description of Sobremesa
  *
  * @author ipaslop262
  */
-class Sobremesa {
+class Sobremesa extends Producto {
     public $marca;
     public $modelo;
     public $procesador;
@@ -15,12 +14,12 @@ class Sobremesa {
     
     public function __construct($row) {
         parent::__construct($row);
-        $this->marca;
-        $this->modelo;
-        $this->procesador;
-        $this->ram;
-        $this->rom;
-        $this->extras;
+        $this->marca = $row['marca'];
+        $this->modelo = $row['modelo'];
+        $this->procesador = $row['procesador'];
+        $this->ram = $row['ram'];
+        $this->rom = $row['rom'];
+        $this->extras = $row['extras'];
     }
     
     public function getMarca() {

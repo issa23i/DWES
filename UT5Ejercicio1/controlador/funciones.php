@@ -1,4 +1,5 @@
 <?php
+require_once '../modelo/Televisor.php';
 
 // comprobar sesión
 
@@ -8,4 +9,3 @@ function comprobar_sesion(){
         header("Location: ../vista/vista_login.php");
     }
 }
-

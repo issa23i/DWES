@@ -19,8 +19,71 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <h1>Detalle de producto</h1>
             </div>
             <div id="productos">
-                
+                <?php if($cod_familia=='TV'): ?>
+                <table border="0">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Resolución</th>
+                            <th>Pulgadas</th>
+                            <th>Panel</th>
+                            <th>PVP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?= $cod ?></td>
+                            <td><?= $nombre ?></td>
+                            <td><?= $resolucion ?></td>
+                            <td><?= $pulgadas ?></td>
+                            <td><?= $panel ?></td>
+                            <td><?= $precio ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php elseif($cod_familia=='ORDENA'): ?>
+                <table border="0">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Procesador</th>
+                            <th>Ram</th>
+                            <th>Rom</th>
+                            <th>Extras</th>
+                            <th>PVP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><?= $cod ?></td>
+                            <td><?= $nombre ?></td>
+                            <td><?= $marca ?></td>
+                            <td><?= $modelo ?></td>
+                            <td><?= $procesador ?></td>
+                            <td><?= $ram ?></td>
+                            <td><?= $rom ?></td>
+                            <td><?= $extras ?></td>
+                            <td><?= $precio ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <?php endif; ?>
             </div>
+            
+        <br class="divisor" />
+        <div id="pie">
+            <p><!-- Migas de pan -->
+                <a href="<?=  htmlspecialchars('vista_listado_familias.php') ?>">Familias ></a>
+                <a href="<?=  htmlspecialchars("vista_listado_productos.php"."?familia=$cod_familia") ?>"><?= $cod_familia ?> ></a>
+            </p>
+            <!-- Cerrar sesión -->
+            <p><a href="<?=  htmlspecialchars('./logout.php') ?>">Cerrar Sesión</a></p> 
+    
+        </div>
         </div>
         <?php
         // put your code here

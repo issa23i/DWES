@@ -12,13 +12,6 @@ if(isset($_POST['vaciar'])){
 }
 
 
-//// Comprobamos si se ha enviado el formulario de añadir
-//if(isset($_POST['add'])){
-//    $cod = $_POST['cod'];
-//    $unidades = $_POST['unidades'];
-//    Cesta_compra::carga_articulo($cod, $unidades);
-//}
-
 // Recuperar la cesta de la compra
 $cesta = Cesta_compra::cargar_cesta();
 $cesta_vacia = Cesta_compra::is_vacia();
@@ -37,5 +30,5 @@ if(isset($_REQUEST['familia'])){
     }
 }
 
-?>
+
 

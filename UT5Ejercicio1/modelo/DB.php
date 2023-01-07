@@ -3,6 +3,7 @@
 include_once '../controlador/constantes.php';
 include_once 'Familia.php';
 include_once 'Producto.php';
+include_once 'Sobremesa.php';
 
 /**
  * Conexión a la Base de Datos
@@ -100,11 +101,11 @@ class DB {
     
     public static function obtiene_tv($cod_producto) {
         $tv;
-        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel FROM televisor INNER JOIN producto WHERE producto.cod = televisor.cod AND producto.cod = $cod_producto";
+        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel FROM televisor INNER JOIN producto WHERE producto.cod = televisor.cod AND producto.cod ="."'$cod_producto'";
         try{
             $resultado = self::ejecuta_consulta($query);
             if( ($resultado->rowCount()>0)){
-                $tv = new Televisor($resultado);
+                $tv = new Televisor($resultado->fetch());
             }
         } catch (Exception $ex) {
             throw $ex;
@@ -114,11 +115,11 @@ class DB {
     
     public static function obtiene_sobremesa($cod_producto) {
         $sobremesa;
-        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, sobremesa.marca, sobremesa.modelo, sobremesa.procesador, sobremesa.ram, sobremesa.rom, sobremesa.extras FROM producto INNER JOIN sobremesa WHERE producto.cod = sobremesa.cod AND producto.cod = $cod_producto";
+        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, sobremesa.marca, sobremesa.modelo, sobremesa.procesador, sobremesa.ram, sobremesa.rom, sobremesa.extras FROM producto INNER JOIN sobremesa WHERE producto.cod = sobremesa.cod AND producto.cod =". "'$cod_producto'";
         try {
             $resultado = self::ejecuta_consulta($query);
             if( ($resultado->rowCount()>0)){
-                $sobremesa = new Sobremesa($resultado);
+                $sobremesa = new Sobremesa($resultado->fetch(PDO::FETCH_ASSOC));
             }
         } catch (Exception $exc) {
             throw $exc;
