@@ -124,7 +124,7 @@ endif; ?>
                 <a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]."?familia=$cod_familia") ?>"><?= $cod_familia ?> ></a>
             </p>
             <!-- Cerrar sesión -->
-            <p><a href="<?=  htmlspecialchars('./logout.php') ?>">Cerrar Sesión</a></p> 
+            <p><a href="<?=  htmlspecialchars('vista_logout.php') ?>">Cerrar Sesión</a></p> 
     
         </div>
     </div>

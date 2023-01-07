@@ -1,4 +1,5 @@
 <?php
+require_once 'Producto.php';
 /**
  * Description of Televisor
  *

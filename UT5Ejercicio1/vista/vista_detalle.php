@@ -81,7 +81,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
                 <a href="<?=  htmlspecialchars("vista_listado_productos.php"."?familia=$cod_familia") ?>"><?= $cod_familia ?> ></a>
             </p>
             <!-- Cerrar sesión -->
-            <p><a href="<?=  htmlspecialchars('./logout.php') ?>">Cerrar Sesión</a></p> 
+            <p><a href="<?=  htmlspecialchars('vista_logout.php') ?>">Cerrar Sesión</a></p> 
     
         </div>
         </div>

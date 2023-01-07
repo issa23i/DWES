@@ -8,5 +8,5 @@ if(isset($_SESSION['usuario'])){
     setcookie(session_name(), 123, time() -1000);
 }
 // Redirige a la paǵina de login
-header('Location: ./login.php');
+header('Location: ../vista/vista_login.php');
 
