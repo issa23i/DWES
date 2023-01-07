@@ -1,8 +1,8 @@
 <?php
 
 include_once '../controlador/constantes.php';
-include_once './Familia.php';
-include_once './Producto.php';
+include_once 'Familia.php';
+include_once 'Producto.php';
 
 /**
  * Conexión a la Base de Datos
@@ -74,8 +74,8 @@ class DB {
         $array_cod = array(':cod' => $cod_producto);
         try{
             $resultado = self::ejecuta_consulta($query,$array_cod);
-            if( ($pdo_st->rowCount()) == 1 ){
-                $producto = new Producto($resultado);
+            if( ($resultado->rowCount()) == 1 ){
+                $producto = new Producto($resultado->fetch());
             }
         } catch (Exception $ex) {
             throw $ex;

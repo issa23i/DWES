@@ -1,6 +1,6 @@
 <?php
 
-require_once '../DB.php';
+require_once '../modelo/DB.php';
 
 $mensaje = '';
 $mensaje_conexion = '';
@@ -18,7 +18,7 @@ if (isset($_POST['enviar'])) {
             $_SESSION['usuario'] = $nombre_usuario;
 
             /// REDIRIGIR
-            header("Location: ./listado_familias.php");
+            header("Location: ../vista/vista_listado_familias.php");
         }
     } catch (Exception $ex) {
         $mensaje_conexion = $ex->getMessage();
