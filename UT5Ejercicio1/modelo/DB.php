@@ -28,7 +28,7 @@ class DB {
                 $resultado = $pdo->query(func_get_arg(0));
                 return $resultado;
             } catch (Exception $ex) {
-                echo $ex->getTraceAsString();
+                throw $ex;
             }
         } else {
             return null;

@@ -1,7 +1,11 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+// comprobar sesión
+
+function comprobar_sesion(){
+    session_start();
+    if( ! isset($_SESSION['usuario'])){
+        header("Location: ../vista/vista_login.php");
+    }
+}
 

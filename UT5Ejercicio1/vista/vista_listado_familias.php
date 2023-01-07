@@ -59,7 +59,7 @@ endif; ?>
 <?php if ($cesta_vacia) print "disabled='true'"; ?>
                        />
             </form>
-            <form id='comprar' action='cesta.php' method='post'>
+            <form id='comprar' action='vista_cesta.php' method='post'>
                 <input type='submit' name='comprar' value='Comprar'
             <?php if ($cesta_vacia) print "disabled='true'"; ?>
                        />

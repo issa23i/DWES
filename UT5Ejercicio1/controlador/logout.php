@@ -1,7 +1,12 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+require_once 'funciones.php';
+comprobar_sesion();
+if(isset($_SESSION['usuario'])){
+    $_SESSION = array();
+    session_destroy();
+    setcookie(session_name(), 123, time() -1000);
+}
+// Redirige a la paǵina de login
+header('Location: ./login.php');
 

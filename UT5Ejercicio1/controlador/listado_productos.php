@@ -2,6 +2,9 @@
 require_once '../modelo/Cesta_compra.php';
 require_once '../modelo/DB.php';
 require_once '../modelo/Producto.php';
+require_once 'funciones.php';
+
+comprobar_sesion();
 
 // Comprobamos si se ha enviado el formulario de vaciar la cesta
 if(isset($_POST['vaciar'])){
@@ -9,12 +12,12 @@ if(isset($_POST['vaciar'])){
 }
 
 
-// Comprobamos si se ha enviado el formulario de añadir
-if(isset($_POST['add'])){
-    $cod = $_POST['cod'];
-    $unidades = $_POST['unidades'];
-    Cesta_compra::carga_articulo($cod, $unidades);
-}
+//// Comprobamos si se ha enviado el formulario de añadir
+//if(isset($_POST['add'])){
+//    $cod = $_POST['cod'];
+//    $unidades = $_POST['unidades'];
+//    Cesta_compra::carga_articulo($cod, $unidades);
+//}
 
 // Recuperar la cesta de la compra
 $cesta = Cesta_compra::cargar_cesta();

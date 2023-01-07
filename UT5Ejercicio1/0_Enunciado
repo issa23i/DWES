@@ -76,19 +76,50 @@ listado_familias.php
     Se obtendrá del modelo un array de objetos de la clase Familia que el controlador pasará a la vista, la cual mostrará en la página el listado de las familias de productos. 
 
 anadir.php
-    El script anadir.php no tiene salida, sino que sólo llama a los métodos de la cesta para modificar la variable de sesión y redirige a listado_productos.php (pasando el código de la familia en la URL. Para esto último, se usará el método get_familia de la cesta, al cual se le pasa el código del producto)
+    El script anadir.php no tiene salida, sino que sólo llama a los métodos 
+    de la cesta para modificar la variable de sesión y redirige a 
+    listado_productos.php (pasando el código de la familia en la URL. 
+    Para esto último, se usará el método get_familia de la cesta, 
+    al cual se le pasa el código del producto)
     
 cesta.php
-    De forma similar, a la hora de listar los productos que hay en la cesta junto a sus unidades en la página cesta.php, crea un formulario por cada fila que incluya el número de unidades que se quieren eliminar de ese producto. Al pulsar el botón Eliminar de ese producto, se eliminarán las unidades indicadas. Los datos del formulario (unidades a eliminar y los datos del producto ocultos) se enviarán al script eliminar.php, el cual cargará la cesta, llamará al método elimina_unidades() y guardará la cesta modificada en la variable de sesión llamando al método guarda_cesta() del objeto cesta.
+    De forma similar, a la hora de listar los productos que hay en la cesta 
+    junto a sus unidades en la página cesta.php, crea un formulario 
+    por cada fila que incluya el número de unidades que se quieren eliminar 
+    de ese producto. Al pulsar el botón Eliminar de ese producto, 
+    se eliminarán las unidades indicadas. Los datos del formulario 
+    (unidades a eliminar y los datos del producto ocultos) 
+    se enviarán al script eliminar.php, el cual cargará la cesta, 
+    llamará al método elimina_unidades() y guardará la cesta modificada 
+    en la variable de sesión llamando al método guarda_cesta() del objeto cesta.
 
 eliminar.php
-    Una vez se han eliminado las unidades o, en su caso, el producto de la cesta, el script eliminar.php redirige a la página cesta.php
+    Una vez se han eliminado las unidades o, en su caso, el producto de la cesta, 
+    el script eliminar.php redirige a la página cesta.php
 
 detalle.php
-    Crea una nueva página que muestre información sobre el modelo de producto. Esta información se almacenará en la nueva tabla de la BD. Ten en cuenta que algunos datos estarán almacenados en la tabla producto.
-    Por ejemplo, para el tipo de producto TV, habría que crear un método obtieneTV($codigo) público y estático en la clase DB que devuelva una instancia de la clase TV y reciba como parámetro el código del producto. Para generar el objeto TV habría que pasar al constructor un array asociativo cuyas claves sean los nombres de las columnas de las tablas televisor y producto de la BD. En el constructor de TV se deben inicializar los atributos propios de TV y llamar al constructor de la clase padre (Producto) pasándole el mismo array asociativo para establecer el valor de los atributos comunes del producto. Dicho array habría que obtenerlo consultando la BD. 
-    En este caso, la tabla televisor tendría también como clave primaria el código del producto, que a la vez sería clave foránea asociada a la columna cod de la tabla producto. Por tanto, habría que usar el mismo código de producto para filtrar los registros en ambas tablas:
-    mysql> select t.*, p.nombre, p.nombre_corto, p.PVP, p.familia FROM televisor t, producto p WHERE t.cod=’BRAVIA2BX400’ AND p.cod=’BRAVIA2BX400’;
+    Crea una nueva página que muestre información sobre el modelo de producto. 
+    Esta información se almacenará en la nueva tabla de la BD. 
+    Ten en cuenta que algunos datos estarán almacenados en la tabla producto.
+    Por ejemplo, para el tipo de producto TV, habría que crear un método 
+    obtieneTV($codigo) público y estático en la clase DB que devuelva 
+    una instancia de la clase TV y reciba como parámetro el código del producto. 
+    Para generar el objeto TV habría que pasar al constructor un array 
+    asociativo cuyas claves sean los nombres de las columnas de las tablas 
+    televisor y producto de la BD. En el constructor de TV se deben inicializar 
+    los atributos propios de TV y llamar al constructor de 
+    la clase padre (Producto) pasándole el mismo array asociativo 
+    para establecer el valor de los atributos comunes del producto. 
+    Dicho array habría que obtenerlo consultando la BD. 
+    En este caso, la tabla televisor tendría también como clave primaria 
+    el código del producto, que a la vez sería clave foránea asociada 
+    a la columna cod de la tabla producto. Por tanto, habría que usar el mismo 
+    código de producto para filtrar los registros en ambas tablas:
+    mysql> select t.*, p.nombre, p.nombre_corto, p.PVP, p.familia 
+    FROM televisor t, producto p WHERE t.cod=’BRAVIA2BX400’ 
+    AND p.cod=’BRAVIA2BX400’;
+    (AÑADO: si el producto no es un televisor, no debería mostrar 
+        el botón detalle, comprobar si es la clase tv)
 
 
 TAREAS BBDD

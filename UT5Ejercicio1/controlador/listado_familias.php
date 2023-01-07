@@ -3,6 +3,9 @@
 require_once '../modelo/Cesta_compra.php';
 require_once '../modelo/DB.php';
 require_once '../modelo/Familia.php';
+require_once 'funciones.php';
+
+comprobar_sesion();
 
 
 // Comprobamos si se ha enviado el formulario de vaciar la cesta

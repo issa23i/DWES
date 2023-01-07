@@ -18,12 +18,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHPWebPage.php to 
     <div id="contenedor">
         <div id="encabezado">
             <h1>Listado de productos</h1>
-            <?= var_dump($_SESSION['cesta']) ?>
         </div>
 
         <!-- Dividir en varios templates -->
         <div id="cesta">      
-            <h3><img src='cesta.png' alt='Cesta' width='24' height='21'> Cesta</h3>
+            <h3><img src='../images/cesta.png' alt='Cesta' width='24' height='21'> Cesta</h3>
             <hr />
 <?php
 // Si la cesta está vacía, mostramos un mensaje
@@ -55,12 +54,12 @@ else: ?>
 
 <?php 
 endif; ?>
-            <form id='vaciar' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?vaciar=1&familia=$familia") ?>' method='post'>
+            <form id='vaciar' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?vaciar=1&familia=$cod_familia") ?>' method='post'>
                 <input type='submit' name='vaciar' value='Vaciar Cesta'
 <?php if ($cesta_vacia) print "disabled='true'"; ?>
                        />
             </form>
-            <form id='comprar' action='cesta.php' method='post'>
+            <form id='comprar' action='vista_cesta.php' method='post'>
                 <input type='submit' name='comprar' value='Comprar'
 <?php if ($cesta_vacia) print "disabled='true'"; ?>
                        />
@@ -79,13 +78,14 @@ endif; ?>
                             <th>Código</th>
                             <th>Nombre</th>
                             <th>PVP</th>
+                            <th>detalle</th>
                         </tr>
                     </thead>
                     <tbody>
                 <?php foreach ($productos as $producto) : ?>
                         <tr>
                             <td>
-                                <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?familia=".$producto->getFamilia()) ?>' method='post'>
+                                <form action='<?php echo htmlspecialchars("../controlador/anadir.php") ?>' method='post'>
                                     <input type="text" name="unidades"/>
                                     <input type="submit" name="add" value="Añadir"/>
                                     <!-- campos necesarios para la cesta -->
@@ -98,6 +98,11 @@ endif; ?>
                             <td><?= $producto->getCodigo() ?></td>
                             <td><?= $producto->mostrar_nombre() ?> </td>
                             <td><?= $producto->getPVP() ?> </td>
+                            <td>
+                                <form action='<?= htmlspecialchars("vista_detalle.php") ?>' method='post'>
+                                    <input type="submit" name='detalle' value="Detalle"/>
+                                </form>
+                            </td>
                         </tr>
                 <?php endforeach; ?>
                     </tbody>
@@ -109,7 +114,7 @@ endif; ?>
         <br class="divisor" />
         <div id="pie">
             <p><!-- Migas de pan -->
-                <a href="<?=  htmlspecialchars('./listado_familias.php') ?>">Familias ></a>
+                <a href="<?=  htmlspecialchars('vista_listado_familias.php') ?>">Familias ></a>
                 <a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]."?familia=$cod_familia") ?>"><?= $cod_familia ?> ></a>
             </p>
             <!-- Cerrar sesión -->
