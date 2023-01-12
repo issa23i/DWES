@@ -7,11 +7,11 @@
  */
 class Producto {
 
-    public $codigo;
-    public $nombre_corto;
-    public $descripcion;
-    public $PVP;
-    public $familia;
+    private $codigo;
+    private $nombre_corto;
+    private $descripcion;
+    private $PVP;
+    private $familia;
 
     public function __construct($row) {
         $this->codigo = $row['cod'];
