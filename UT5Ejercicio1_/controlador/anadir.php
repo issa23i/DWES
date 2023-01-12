@@ -15,9 +15,10 @@ if(isset($_POST['add'])){
     $cesta->guardar_cesta($cesta);
     // añadir unidades
     $cesta->carga_articulo($cod, $unidades);
+    $cesta->guardar_cesta($cesta);
     
     // obtener el código de familia
-    $cod_familia = Cesta_compra::get_familia($cod);
+    $cod_familia = $cesta->get_familia($cod);
     
     // redirigir a vista listado productos
     header("Location: ../vista/vista_listado_productos.php?familia=$cod_familia");

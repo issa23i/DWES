@@ -9,7 +9,9 @@ if (isset($_POST['enviar'])) {
     $flag_nombre = false;
     $flag_clave = false;
     $nombre_usuario = $_POST['usuario'];
-    $clave_usuario = md5($_POST['password']);
+    $clave_usuario = $_POST['password'];
+echo $clave_usuario;
+
     try {
         if (DB::verifica_cliente($nombre_usuario, $clave_usuario)) {
 
@@ -32,5 +34,6 @@ if (isset($nombre_usuario) && isset($clave_usuario)) {
         $mensaje = 'Login Correcto';
     }
 }
+include_once '../vista/vista_login.php';
 ?>
 

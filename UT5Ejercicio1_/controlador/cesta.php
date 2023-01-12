@@ -14,6 +14,6 @@ if(isset($_POST['cambiar_unidades'])){
 
 // Recuperar la cesta de la compra
 $cesta = Cesta_compra::cargar_cesta();
-$cesta_vacia = Cesta_compra::is_vacia();
+$cesta_vacia = $cesta->is_vacia();
 
-$total = Cesta_compra::get_coste();
+$total = $cesta->get_coste();

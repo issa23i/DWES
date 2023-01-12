@@ -85,12 +85,20 @@ class DB {
     }
     
     public static function verifica_cliente($usuario,$password){
-        $query = "SELECT * FROM `usuarios` WHERE usuario = :nombre_usuario AND password =  :clave_usuario";
-        $array_usuario = array(':nombre_usuario' => $usuario, ':clave_usuario' => $password);
+        //$query = "SELECT * FROM `usuarios` WHERE usuario = :nombre_usuario AND password =  :clave_usuario";
+        //$array_usuario = array(':nombre_usuario' => $usuario, ':clave_usuario' => $password);
+        $query = "SELECT * FROM `usuarios` WHERE usuario = :nombre_usuario";
+        $array_usuario = array(':nombre_usuario' => $usuario);
+        
+        
         try{
             $resultado = self::ejecuta_consulta($query,$array_usuario);
             if( ($resultado->rowCount())>0 ){
-                return true;
+                //return true;
+                $usuario = $resultado->fetch();
+                $hash = $usuario['password'];
+                $login_ok = password_verify($password, $hash);
+                return $login_ok;
             } else {
                 return false;
             }

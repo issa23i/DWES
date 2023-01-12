@@ -7,7 +7,7 @@
  */
 class Cesta_compra {
 
-    public $cesta = [];
+    protected $cesta = [];
     /**
      * Carga la cesta de la sesión, si no existe, la crea
      * 
@@ -41,7 +41,6 @@ class Cesta_compra {
      * @param type string
      */
     public function carga_articulo($cod, $unidades) {
-        $cesta = self::cargar_cesta();
 
         // si ya existe el producto en la cesta, suma las unidades
         if (array_key_exists($cod, $cesta)) {
@@ -56,8 +55,6 @@ class Cesta_compra {
         $producto = DB::obtiene_producto($cod);
         $cesta[$cod]['nombre'] = $producto->mostrar_nombre();
         $cesta[$cod]['pvp'] = $producto->getPVP();
-
-        self::guardar_cesta($cesta);
     }
     
     /**
@@ -65,10 +62,9 @@ class Cesta_compra {
      * @return type
      */
     public function get_coste() {
-        $cesta = self::cargar_cesta();
         $total = 0;
         // recorrer la cesta para hayar el precio de los productos
-        foreach ($cesta as $cod => $prod) {
+        foreach ($this->cesta as $cod => $prod) {
             // el objeto se obtiene con el método obtiene_producto de la clase DB
             $producto = DB::obtiene_producto($cod);
             // se consulta su precio y se suma al total
@@ -118,7 +114,6 @@ class Cesta_compra {
             } else {
                 $cesta[$cod]['unidades'] = intval($cesta[$cod]['unidades']) - 1;
             }
-            self::guardar_cesta($cesta);
         }
     }
 
@@ -139,7 +134,6 @@ class Cesta_compra {
             } else {
                 $cesta[$cod]['unidades'] = $unidades_cambiadas;
             }
-            self::guardar_cesta($cesta);
         }
     }
 
@@ -147,8 +141,7 @@ class Cesta_compra {
      * Convierte el array cesta en uno vacío y lo guarda en la sesión
      */
     public function vaciar_cesta() {
-        $cesta = [];
-        self::guardar_cesta($cesta);
+        $this->cesta = [];
     }
 
     /**
@@ -158,7 +151,7 @@ class Cesta_compra {
     public function is_vacia() {
         $vacia = true;
         // si al menos hay una entrada
-        if (count(self::cargar_cesta()) > 0) {
+        if (count($this->cesta) > 0) {
             $vacia = false;
         }
         return $vacia;
