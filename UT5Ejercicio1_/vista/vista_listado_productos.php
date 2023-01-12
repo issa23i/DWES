@@ -92,8 +92,6 @@ endif; ?>
                                     <!-- campos necesarios para la cesta -->
                                     <input type="hidden" name="familia" value="<?= $producto->getFamilia() ?>"/>
                                     <input type="hidden" name="cod" value="<?= $producto->getCodigo() ?>"/>
-                                    <input type="hidden" name="nombre" value="<?= $producto->mostrar_nombre() ?>"/>
-                                    <input type="hidden" name="pvp" value="<?= $producto->getPVP() ?>"/>
                                 </form>
                             </td>
                             <td><?= $producto->getCodigo() ?></td>
