@@ -52,7 +52,12 @@ class Cesta_compra {
         }
 
         // obtener los campos nombre y pvp del producto
-        $producto = DB::obtiene_producto($cod);
+        try {
+            $producto = DB::obtiene_producto($cod);
+        } catch (Exception $exc) {
+            throw $exc;
+        }
+
         $cesta[$cod]['nombre'] = $producto->mostrar_nombre();
         $cesta[$cod]['pvp'] = $producto->getPVP();
     }

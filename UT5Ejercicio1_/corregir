@@ -1,4 +1,7 @@
 CestaCompra.php y funciones.php debe de ir en carpeta servicio
-cambiar password_verify en MySQL -- ¿funciona?
 asegurarse que todas las consultas son preparadas
 en vistalistado_productos no se puede enviar el input hidden pvp es una falla de seguridad, realizar una consulta
+Cesta es código:objetoProducto
+implements jsonSerializable 
+function jsonSerialize()
+echo '<pre> 
