@@ -1,5 +1,4 @@
-<?php require_once '../controlador/listado_productos.php';
-require_once '../modelo/Televisor.php';?>
+<?php require_once '../controlador/listado_productos.php';?>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -42,12 +41,12 @@ else: ?>
                         </tr>
                     </thead>
                     <tbody>
-    <?php foreach ($cesta as $key => $value) : ?>
+    <?php foreach ($productos_cesta as $value) : ?>
                         <tr>
-                            <td><?= $key ?></td>
-                            <td><?= $value['nombre'] ?></td>
-                            <td><?= $value['pvp'] ?></td>
-                            <td><?= $value['unidades'] ?></td>
+                            <td><?= $value['producto']->getCodigo(); ?></td>
+                            <td><?= $value['producto']->mostrar_nombre(); ?></td>
+                            <td><?= $value['producto']->getPVP(); ?></td>
+                            <td><?= $value['unidades']; ?></td>
                         </tr>
     <?php endforeach; ?>
                     </tbody>

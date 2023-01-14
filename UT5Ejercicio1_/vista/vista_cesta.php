@@ -39,16 +39,16 @@ if ($cesta_vacia):
                             </tr>
                         </thead>
                         <tbody>
-    <?php foreach ($cesta as $key => $value) : ?>
+    <?php foreach ($productos as $value) : ?>
                                 <tr>
-                                    <td><?= $key ?></td>
-                                    <td><?= $value['nombre'] ?></td>
-                                    <td><?= $value['pvp'] ?></td>
+                                    <td><?= $value['producto']->getCodigo(); ?></td>
+                                    <td><?= $value['producto']->mostrar_nombre();  ?></td>
+                                    <td><?= $value['producto']->getPVP(); ?></td>
                                     <td> x </td>
                         <form action='<?= htmlspecialchars("../controlador/eliminar.php")?>' method="post">
-                                    <td><input type="hidden" name="cod" value="<?= $key ?>"/></td>
+                                    <td><input type="hidden" name="cod" value="<?= $value['producto']->getCodigo() ?>"/></td>
                                     <td><input type="number" name="unidades_cambiadas" value="<?= $value['unidades'] ?>"/></td>
-                                    <td> <?=($value['unidades'] * $value['pvp']); ?> </td>
+                                    <td> <?=($value['unidades'] * $value['producto']->getPVP()); ?> </td>
                                     <td><input type='submit' name="cambiar_unidades" value="Cambiar"></td>
                                 </tr>
                         </form>

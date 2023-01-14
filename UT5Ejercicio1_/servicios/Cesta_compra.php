@@ -9,19 +9,19 @@ class Cesta_compra {
 
     protected $cesta = [];
     /**
-     * Carga la cesta de la sesión, si no existe, la crea
+     * Carga la cesta de la sesión, si no existe, la crea (objeto Cesta_compra()
      * 
      * @return array
      */
     public static function cargar_cesta() {
-        // carga de la sesión
+        // carga de la sesión un objeto Cesta_compra
         if (isset($_SESSION['cesta'])) {
-            $cesta = $_SESSION['cesta'];
+            $cesta_compra = $_SESSION['cesta'];
             // si no existe, la crea y la guarda
         } else {
-            $cesta = new Cesta_compra();
+            $cesta_compra = new Cesta_compra();
         }
-        return $cesta;
+        return $cesta_compra;
     }
 
     /**
@@ -41,25 +41,23 @@ class Cesta_compra {
      * @param type string
      */
     public function carga_articulo($cod, $unidades) {
+        
+    // array asociativo  { cod => { 'producto':{producto}, 'unidades':{unidades} } } 
 
         // si ya existe el producto en la cesta, suma las unidades
-        if (array_key_exists($cod, $cesta)) {
-            $unidades_numero = intval($cesta[$cod]['unidades']);
+        if (array_key_exists($cod, $this->cesta)) {
+            $unidades_numero = intval($this->cesta[$cod]['unidades']);
             $unidades_numero += $unidades;
-            $cesta[$cod]['unidades'] = $unidades_numero;
+            $this->cesta[$cod]['unidades'] = $unidades_numero;
         } else {
-            $cesta[$cod]['unidades'] = $unidades;
+            try {
+                $producto = DB::obtiene_producto($cod);
+                $this->cesta[$cod]['producto']=$producto;
+                $this->cesta[$cod]['unidades'] = $unidades;
+            } catch (Exception $exc) {
+                throw $exc;
+            }
         }
-
-        // obtener los campos nombre y pvp del producto
-        try {
-            $producto = DB::obtiene_producto($cod);
-        } catch (Exception $exc) {
-            throw $exc;
-        }
-
-        $cesta[$cod]['nombre'] = $producto->mostrar_nombre();
-        $cesta[$cod]['pvp'] = $producto->getPVP();
     }
     
     /**
@@ -69,12 +67,12 @@ class Cesta_compra {
     public function get_coste() {
         $total = 0;
         // recorrer la cesta para hayar el precio de los productos
-        foreach ($this->cesta as $cod => $prod) {
+        foreach ($this->cesta as $value) {
             // el objeto se obtiene con el método obtiene_producto de la clase DB
-            $producto = DB::obtiene_producto($cod);
+            $producto = $value['producto'];
+            $unidades = $value['unidades'];
             // se consulta su precio y se suma al total
             $pvp_producto = floatval($producto->getPVP());
-            $unidades = floatval($prod['unidades']);
             $total_producto_actual =  $pvp_producto * $unidades;
             $total = $total + $total_producto_actual;
         }
@@ -86,7 +84,8 @@ class Cesta_compra {
      * @return type array
      */
     public function get_productos() {
-        return self::cargar_cesta();
+    // array asociativo  { cod => { 'producto':{producto}, 'unidades':{unidades} } } 
+        return $this->cesta;
     }
 
     /**
@@ -95,9 +94,17 @@ class Cesta_compra {
      * @return type string
      */
     public function get_familia($cod_pro) {
-        // el objeto se obtiene con el método obtiene_producto de la clase DB
-        $producto = DB::obtiene_producto($cod_pro);
-        return $producto->getFamilia();
+        // si el producto está en la cesta, obtenemos la familia 
+        // del producto almacenado en el array cesta
+        if(array_key_exists($cod_pro, $this->cesta)){
+            $producto = $this->cesta[$cod_pro]['producto'];
+        // si no está en la cesta, el objeto producto se obtiene con 
+        // el método obtiene_producto de la clase DB  
+        } else {
+            $producto = DB::obtiene_producto($cod_pro);
+        }
+        $cod_familia = $producto->getFamilia();
+        return $cod_familia;
     }
 
     /**
@@ -109,15 +116,14 @@ class Cesta_compra {
      * @param type string
      */
     public static function eliminar_producto($cod) {
-        $cesta = self::cargar_cesta();
         // comprobar que el producto existe en la cesta
-        if (array_key_exists($cod, $cesta)) {
-            $unidades = intval($cesta[$cod]['unidades']);
+        if (array_key_exists($cod, $this->cesta)) {
+            $unidades = intval($this->cesta[$cod]['unidades']);
             // si hay una unidad o cero, se elimina el producto
             if ($unidades <= 1) {
-                unset($cesta[$cod]);
+                unset($this->cesta[$cod]);
             } else {
-                $cesta[$cod]['unidades'] = intval($cesta[$cod]['unidades']) - 1;
+                $cesta[$cod]['unidades'] = intval($this->cesta[$cod]['unidades']) - 1;
             }
         }
     }
@@ -131,13 +137,13 @@ class Cesta_compra {
      * @param type $unidades_cambiadas
      */
     public function cambiar_unidades($cod, $unidades_cambiadas) {
-        $cesta = self::cargar_cesta();
         // comprobar que el artículo existe en la cesta
-        if (array_key_exists($cod, $cesta)) {
+        if (array_key_exists($cod, $this->cesta)) {
+            // si se ha metido un número 0 o negativo, se borran las unidades
             if ($unidades_cambiadas < 1) {
-                unset($cesta[$cod]);
+                unset($this->cesta[$cod]);
             } else {
-                $cesta[$cod]['unidades'] = $unidades_cambiadas;
+                $this->cesta[$cod]['unidades'] = $unidades_cambiadas;
             }
         }
     }

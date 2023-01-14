@@ -2,7 +2,7 @@
 include_once '../modelo/DB.php';
 include_once '../modelo/Televisor.php';
 include_once '../modelo/Producto.php';
-require_once 'funciones.php';
+require_once '../servicios/funciones.php';
 
 comprobar_sesion();
 
@@ -18,14 +18,14 @@ if(isset($_POST['detalle'])){
         $cod = $_POST['cod_pro'];
         if($cod_familia=='TV'){
           $tv = DB::obtiene_tv($cod);  
-          $nombre = $tv->nombre_corto;
+          $nombre = $tv->mostrar_nombre();
           $pulgadas = $tv->getPulgadas();
           $resolucion = $tv->getResolucion();
           $panel = $tv->getPanel();
           $precio = $tv->getPVP();
         } elseif ($cod_familia=='ORDENA'){
             $ordenador = DB::obtiene_sobremesa($cod);
-            $nombre = $ordenador->nombre_corto;
+            $nombre = $ordenador->mostrar_nombre();
             $marca = $ordenador->getMarca();
             $modelo = $ordenador->getModelo();
             $procesador = $ordenador->getProcesador();

@@ -1,7 +1,9 @@
-CestaCompra.php y funciones.php debe de ir en carpeta servicio
+detalle del segundo ordenador da error, en mostrar_nombre detalle.php linea 28 , DB.php linea 135
 asegurarse que todas las consultas son preparadas
 en vistalistado_productos no se puede enviar el input hidden pvp es una falla de seguridad, realizar una consulta
 Cesta es código:objetoProducto
 implements jsonSerializable 
 function jsonSerialize()
 echo '<pre> 
+
+excepciones

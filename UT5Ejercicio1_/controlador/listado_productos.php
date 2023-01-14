@@ -1,24 +1,24 @@
 <?php
-require_once '../modelo/Cesta_compra.php';
+require_once '../servicios/Cesta_compra.php';
 require_once '../modelo/DB.php';
 require_once '../modelo/Producto.php';
-require_once 'funciones.php';
+require_once '../servicios/funciones.php';
 
 comprobar_sesion();
 
 // Recuperar la cesta de la compra
-$cesta = Cesta_compra::cargar_cesta();
+$cesta_compra = Cesta_compra::cargar_cesta();
 
 // Comprobamos si se ha enviado el formulario de vaciar la cesta
 if(isset($_POST['vaciar'])){
-    $cesta->vaciar_cesta();
-    $cesta->guardar_cesta($cesta);
+    $cesta_compra->vaciar_cesta();
+    $cesta_compra->guardar_cesta($cesta_compra);
 }
 
 
 // comprobar si está vacía
-$cesta_vacia = $cesta->is_vacia();
-
+$cesta_vacia = $cesta_compra->is_vacia();
+$productos_cesta = $cesta_compra->get_productos();
 
 $mensaje_conexion = '';
 $cod_familia = '';

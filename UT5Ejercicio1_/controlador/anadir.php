@@ -1,9 +1,9 @@
 <?php
 
-require_once '../modelo/Cesta_compra.php';
+require_once '../servicios/Cesta_compra.php';
 require_once '../modelo/DB.php';
 require_once '../modelo/Producto.php';
-require_once 'funciones.php';
+require_once '../servicios/funciones.php';
 
 comprobar_sesion();
 
@@ -11,14 +11,20 @@ comprobar_sesion();
 if(isset($_POST['add'])){
     $cod = $_POST['cod'];
     $unidades = $_POST['unidades'];
-    $cesta = Cesta_compra::cargar_cesta();
-    $cesta->guardar_cesta($cesta);
+    $cesta_compra = Cesta_compra::cargar_cesta();
+    $cesta_compra->guardar_cesta($cesta_compra);
     // añadir unidades
-    $cesta->carga_articulo($cod, $unidades);
-    $cesta->guardar_cesta($cesta);
+    try {
+        $cesta_compra->carga_articulo($cod, $unidades);
+    } catch (Exception $exc) {
+        echo $exc->getMessage();
+    }
+
+    
+    $cesta_compra->guardar_cesta($cesta_compra);
     
     // obtener el código de familia
-    $cod_familia = $cesta->get_familia($cod);
+    $cod_familia = $cesta_compra->get_familia($cod);
     
     // redirigir a vista listado productos
     header("Location: ../vista/vista_listado_productos.php?familia=$cod_familia");

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'funciones.php';
+require_once '../servicios/funciones.php';
 comprobar_sesion();
 if(isset($_SESSION['usuario'])){
     $_SESSION = array();
