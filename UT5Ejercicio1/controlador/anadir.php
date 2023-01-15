@@ -16,16 +16,27 @@ if (isset($_POST['add'])) {
     try {
         $cesta_compra->carga_articulo($cod, $unidades);
     } catch (Exception $exc) {
+        echo 'Excepción : ';
         echo $exc->getMessage();
-        echo "<br>";
+        echo ' ---- Traza : ';
         echo $exc->getTraceAsString();
+        die('  --- Hubo un problema obteniendo su cesta de la compra.');
     }
 
 
     $cesta_compra->guardar_cesta($cesta_compra);
 
     // obtener el código de familia
-    $cod_familia = $cesta_compra->get_familia($cod);
+    try{
+        $cod_familia = $cesta_compra->get_familia($cod);
+    } catch (Exception $ex) {
+        echo 'Excepción : ';
+        echo $exc->getMessage();
+        echo ' ---- Traza : ';
+        echo $exc->getTraceAsString();
+        die('  ----  Hubo un problema obteniendo el código de familia.');
+    }
+    
 
     // redirigir a vista listado productos
     header("Location: ../controlador/listado_productos.php?familia=$cod_familia");

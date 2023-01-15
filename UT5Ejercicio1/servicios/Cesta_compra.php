@@ -68,7 +68,6 @@ class Cesta_compra {
         $total = 0;
         // recorrer la cesta para hayar el precio de los productos
         foreach ($this->cesta as $value) {
-            // el objeto se obtiene con el método obtiene_producto de la clase DB
             $producto = $value['producto'];
             $unidades = $value['unidades'];
             // se consulta su precio y se suma al total
@@ -84,7 +83,7 @@ class Cesta_compra {
      * @return type array
      */
     public function get_productos() {
-    // array asociativo  { cod => { 'producto':{producto}, 'unidades':{unidades} } } 
+    // array asociativo  { cod => { 'producto': {producto}, 'unidades': unidades } } 
         return $this->cesta;
     }
 
@@ -101,7 +100,11 @@ class Cesta_compra {
         // si no está en la cesta, el objeto producto se obtiene con 
         // el método obtiene_producto de la clase DB  
         } else {
-            $producto = DB::obtiene_producto($cod_pro);
+            try {
+                $producto = DB::obtiene_producto($cod_pro);
+            } catch (Exception $exc) {
+                throw $exc;
+            }
         }
         $cod_familia = $producto->getFamilia();
         return $cod_familia;
