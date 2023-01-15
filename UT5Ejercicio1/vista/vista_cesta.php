@@ -1,6 +1,3 @@
-<?php
-require_once '../controlador/cesta.php';
-?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +6,7 @@ require_once '../controlador/cesta.php';
         <link rel="stylesheet" href="../styles/tienda.css"/>
     </head>
     <body class="pagproductos">
-        
+
 
         <div id="contenedor">
             <div id="encabezado">
@@ -19,10 +16,10 @@ require_once '../controlador/cesta.php';
 
 
             <div id="pagar">
-<?php
+                <?php
 // Si la cesta está vacía, mostramos un mensaje
-if ($cesta_vacia):
-    ?>
+                if ($cesta_vacia):
+                    ?>
                     <p>Cesta vacía</p>
                     <?php
 // Si no está vacía, mostrar su contenido
@@ -39,52 +36,52 @@ if ($cesta_vacia):
                             </tr>
                         </thead>
                         <tbody>
-    <?php foreach ($cesta as $key => $value) : ?>
+                            <?php foreach ($productos as $value) : ?>
                                 <tr>
-                                    <td><?= $key ?></td>
-                                    <td><?= $value['nombre'] ?></td>
-                                    <td><?= $value['pvp'] ?></td>
+                                    <td><?= $value['producto']->getCodigo(); ?></td>
+                                    <td><?= $value['producto']->mostrar_nombre(); ?></td>
+                                    <td><?= $value['producto']->getPVP(); ?></td>
                                     <td> x </td>
-                        <form action='<?= htmlspecialchars("../controlador/eliminar.php")?>' method="post">
-                                    <td><input type="hidden" name="cod" value="<?= $key ?>"/></td>
-                                    <td><input type="number" name="unidades_cambiadas" value="<?= $value['unidades'] ?>"/></td>
-                                    <td> <?=($value['unidades'] * $value['pvp']); ?> </td>
-                                    <td><input type='submit' name="cambiar_unidades" value="Cambiar"></td>
+                            <form action='<?= htmlspecialchars("../controlador/eliminar.php") ?>' method="post">
+                                <td><input type="hidden" name="cod" value="<?= $value['producto']->getCodigo() ?>"/></td>
+                                <td><input type="number" name="unidades_cambiadas" value="<?= $value['unidades'] ?>"/></td>
+                                <td> <?= ($value['unidades'] * $value['producto']->getPVP()); ?> </td>
+                                <td><input type='submit' name="cambiar_unidades" value="Cambiar"></td>
                                 </tr>
-                        </form>
+                            </form>
 
-        
-                            <?php endforeach; ?>
+
+                        <?php endforeach; ?>
                         </tbody>
 
                     </table>
                     <br class="divisor" />
                     <p>Precio total: <?= $total ?> </p>
 
-<?php endif; ?>
+                <?php endif; ?>
             </div>
             <div >
-                    <form  action='<?php echo htmlspecialchars("vista_logout.php"); ?>' method='post'>
-                        <input type='submit' name='logout' value='Cerrar Sesión'
-<?php if ($cesta_vacia) print "disabled='true'"; ?>
-                               />
-                    </form>
-                    <form  action=<?= htmlspecialchars('../controlador/pagar.php'); ?> method='post'>
-                        <input type='submit' name='pagar' value='Pagar'
-<?php if ($cesta_vacia) print "disabled='true'"; ?>
-                               />
-                    </form>
+                <form  action='<?php echo htmlspecialchars("../controlador/logout.php"); ?>' method='post'>
+                    <input type='submit' name='logout' value='Cerrar Sesión'
+                    <?php if ($cesta_vacia) print "disabled='true'"; ?>
+                           />
+                </form>
+                <form  action=<?= htmlspecialchars('../controlador/pagar.php'); ?> method='post'>
+                    <input type='submit' name='pagar' value='Pagar'
+                    <?php if ($cesta_vacia) print "disabled='true'"; ?>
+                           />
+                </form>
             </div>
 
             <br class="divisor" />
             <div id="pie">
-                
+
                 <p><!-- Migas de pan -->
-                    <a href="<?=  htmlspecialchars('vista_listado_familias.php') ?>">Familias ></a>
-                    <a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]) ?>"> Cesta ></a>
+                    <a href="<?= htmlspecialchars('../controlador/listado_familias.php') ?>">Familias ></a>
+                    <a href="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>"> Cesta ></a>
                 </p>
                 <!-- Cerrar sesión -->
-                <p><a href="<?=  htmlspecialchars('vista_logout.php') ?>">Cerrar Sesión</a></p> 
+                <p><a href="<?= htmlspecialchars('vista_logout.php') ?>">Cerrar Sesión</a></p> 
 
 
             </div>

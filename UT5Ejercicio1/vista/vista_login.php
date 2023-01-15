@@ -1,6 +1,3 @@
-<?php 
-require_once '../controlador/login.php';
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Tienda Web: login.php -->
 <html>
@@ -12,32 +9,28 @@ require_once '../controlador/login.php';
     </head>
 
     <body>
-    <div id='login'>
-        <header>
-            
-        <div class="alert alert-info"><?= $mensaje_conexion?></div>
-            <p><a href="<?=  htmlspecialchars($_SERVER["PHP_SELF"]) ?>">Login</a></p>
-        </header>
-        <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>' method='post'>
-            <fieldset >
-                <legend>Login</legend>
-                <div><span class='error'><?= $mensaje ?></span></div>
-                <div class='campo'>
-                    <label for='usuario' >Usuario:</label><br/>
-                    <input type='text' name='usuario' id='usuario' maxlength="50" /><br/>
-                </div>
-                <div class='campo'>
-                    <label for='password' >Contraseña:</label><br/>
-                    <input type='password' name='password' id='password' maxlength="50" /><br/>
-                </div>
+        <div id='login'>
+            <form action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>' method='post'>
+                <fieldset >
+                    <legend>Login</legend>
+                    <div><span class='error'><?= $mensaje ?></span></div>
+                    <div class='campo'>
+                        <label for='usuario' >Usuario:</label><br/>
+                        <input type='text' name='usuario' id='usuario' maxlength="50" /><br/>
+                    </div>
+                    <div class='campo'>
+                        <label for='password' >Contraseña:</label><br/>
+                        <input type='password' name='password' id='password' maxlength="50" /><br/>
+                    </div>
 
-                <div class='campo'>
-                    <input type='submit' name='enviar' value='Enviar' />
-                </div>
-            </fieldset>
-        </form>
-    </div>
-        <script src="script.js"></script>
-</body>
+                    <div class='campo'>
+                        <input type='submit' name='enviar' value='Enviar' />
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="excepciones alert alert-info"><?= $mensaje_excepcion ?></div>
+    </body>
 </html>
 </html>

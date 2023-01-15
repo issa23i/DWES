@@ -85,12 +85,18 @@ class DB {
     }
     
     public static function verifica_cliente($usuario,$password){
-        $query = "SELECT * FROM `usuarios` WHERE usuario = :nombre_usuario AND password =  :clave_usuario";
-        $array_usuario = array(':nombre_usuario' => $usuario, ':clave_usuario' => $password);
+        $query = "SELECT * FROM `usuarios` WHERE usuario = :nombre_usuario";
+        $array_usuario = array(':nombre_usuario' => $usuario);
+        
+        
         try{
             $resultado = self::ejecuta_consulta($query,$array_usuario);
             if( ($resultado->rowCount())>0 ){
-                return true;
+                //return true;
+                $usuario = $resultado->fetch();
+                $hash = $usuario['password'];
+                $login_ok = password_verify($password, $hash);
+                return $login_ok;
             } else {
                 return false;
             }
@@ -101,9 +107,10 @@ class DB {
     
     public static function obtiene_tv($cod_producto) {
         $tv;
-        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel FROM televisor INNER JOIN producto WHERE producto.cod = televisor.cod AND producto.cod ="."'$cod_producto'";
+        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, televisor.pulgadas, televisor.resolucion, televisor.panel FROM televisor INNER JOIN producto WHERE producto.cod = televisor.cod AND producto.cod = :cod_producto";
+        $array_producto = array(':cod_producto' => $cod_producto);
         try{
-            $resultado = self::ejecuta_consulta($query);
+            $resultado = self::ejecuta_consulta($query, $array_producto);
             if( ($resultado->rowCount()>0)){
                 $tv = new Televisor($resultado->fetch());
             }
@@ -115,9 +122,10 @@ class DB {
     
     public static function obtiene_sobremesa($cod_producto) {
         $sobremesa;
-        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, sobremesa.marca, sobremesa.modelo, sobremesa.procesador, sobremesa.ram, sobremesa.rom, sobremesa.extras FROM producto INNER JOIN sobremesa WHERE producto.cod = sobremesa.cod AND producto.cod =". "'$cod_producto'";
+        $query = "SELECT producto.cod, producto.nombre_corto, producto.descripcion, producto.PVP, producto.familia, sobremesa.marca, sobremesa.modelo, sobremesa.procesador, sobremesa.ram, sobremesa.rom, sobremesa.extras FROM producto INNER JOIN sobremesa WHERE producto.cod = sobremesa.cod AND producto.cod = :cod_producto";
+        $array_producto = array(':cod_producto' => $cod_producto);
         try {
-            $resultado = self::ejecuta_consulta($query);
+            $resultado = self::ejecuta_consulta($query, $array_producto);
             if( ($resultado->rowCount()>0)){
                 $sobremesa = new Sobremesa($resultado->fetch(PDO::FETCH_ASSOC));
             }

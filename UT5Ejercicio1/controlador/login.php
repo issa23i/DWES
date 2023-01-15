@@ -3,13 +3,14 @@
 require_once '../modelo/DB.php';
 
 $mensaje = '';
-$mensaje_conexion = '';
+$mensaje_excepcion = '';
 
 if (isset($_POST['enviar'])) {
     $flag_nombre = false;
     $flag_clave = false;
     $nombre_usuario = $_POST['usuario'];
-    $clave_usuario = md5($_POST['password']);
+    $clave_usuario = $_POST['password'];
+
     try {
         if (DB::verifica_cliente($nombre_usuario, $clave_usuario)) {
 
@@ -18,10 +19,10 @@ if (isset($_POST['enviar'])) {
             $_SESSION['usuario'] = $nombre_usuario;
 
             /// REDIRIGIR
-            header("Location: ../vista/vista_listado_familias.php");
+            header("Location: ../controlador/listado_familias.php");
         }
     } catch (Exception $ex) {
-        $mensaje_conexion = $ex->getMessage();
+        $mensaje_excepcion = $ex->getMessage();
     }
 }
 if (isset($nombre_usuario) && isset($clave_usuario)) {
@@ -32,5 +33,7 @@ if (isset($nombre_usuario) && isset($clave_usuario)) {
         $mensaje = 'Login Correcto';
     }
 }
+
+require_once '../vista/vista_login.php';
 ?>
 

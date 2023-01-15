@@ -1,3 +1,2 @@
-CestaCompra.php y funciones.php debe de ir en carpeta servicio
-cambiar password_verify en MySQL
-asegurarse que todas las consultas son preparadas
+implements jsonSerializable 
+function jsonSerialize()
