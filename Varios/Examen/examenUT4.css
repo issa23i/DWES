@@ -1,0 +1,53 @@
+/* Curso "Páginas web con PHP"
+   Bartolomé Sintes Marco
+   https://www.mclibre.org
+
+   CSS soluciones de los ejercicios
+   22 de enero de 2008
+*/
+
+body {
+  background-color: #F6F6FF;
+  font-family: sans-serif;
+  padding: 0 20px;
+}
+
+h1 {
+  margin: 10px;
+  font-size: 140%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+fieldset {
+  background-color: #E6E6FF;
+  border: #8686FF 3px solid;
+  padding: 10px 20px 20px;
+}
+
+legend {
+  background-color: white;
+  border: #8686FF 3px solid;
+  font-size: 120%;
+  padding: 0px 10px;
+}
+
+input {
+  font-family: monospace;
+}
+
+.der {
+  text-align: right;
+  margin: 10px 0px;
+}
+
+address {
+  clear: both;
+  border-top: black solid 1px;
+  margin-top: 10px;
+  padding-top: 5px;
+}
+
+p.licencia {
+  text-align: center;
+}
