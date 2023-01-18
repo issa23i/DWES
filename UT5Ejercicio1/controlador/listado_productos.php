@@ -13,7 +13,7 @@ $cesta_compra = Cesta_compra::cargar_cesta();
 // Comprobamos si se ha enviado el formulario de vaciar la cesta
 if (isset($_POST['vaciar'])) {
     $cesta_compra->vaciar_cesta();
-    $cesta_compra->guardar_cesta($cesta_compra);
+    $cesta_compra->guardar_cesta();
 }
 
 
@@ -26,7 +26,7 @@ $cod_familia = '';
 
 // Obtener la lista de productos
 if (isset($_REQUEST['familia'])) {
-    $cod_familia = $_REQUEST['familia'];
+    $cod_familia = htmlspecialchars($_REQUEST['familia']);
     try {
         $productos = DB::obtiene_productos($cod_familia);
     } catch (Exception $exc) {

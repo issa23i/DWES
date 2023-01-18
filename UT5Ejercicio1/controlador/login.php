@@ -5,6 +5,12 @@ require_once '../modelo/DB.php';
 $mensaje = '';
 $mensaje_excepcion = '';
 
+if (isset($_REQUEST['login'])){
+    $mensaje = 'Debe iniciar sesión';
+} elseif (isset ($_REQUEST['logout'])){
+    $mensaje = 'Sesión cerrada correctamente';
+}
+
 if (isset($_POST['enviar'])) {
     $flag_nombre = false;
     $flag_clave = false;
@@ -29,9 +35,7 @@ if (isset($nombre_usuario) && isset($clave_usuario)) {
     // Si falló el login
     if (!$flag_nombre || !$flag_clave) {
         $mensaje = 'Usuario o clave incorrecta';
-    } else {
-        $mensaje = 'Login Correcto';
-    }
+    } 
 }
 
 require_once '../vista/vista_login.php';

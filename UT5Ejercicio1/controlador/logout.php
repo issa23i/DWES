@@ -9,5 +9,5 @@ if (isset($_SESSION['usuario'])) {
 }
 require_once '../vista/vista_logout.php';
 // Redirige a la paǵina de login
-header('Location: ../controlador/login.php');
+header('Location: ../controlador/login.php?logout=true');
 

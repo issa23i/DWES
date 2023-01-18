@@ -28,7 +28,7 @@ class Cesta_compra {
      * guarda en la sesión el array de la cesta
      * @param type array
      */
-    public function guardar_cesta($cesta) {
+    public function guardar_cesta() {
         $_SESSION['cesta'] = $this;
     }
 
