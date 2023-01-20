@@ -20,6 +20,15 @@ if (isset($_GET['rol'])){
     }
 }
 
+/** si ha seleccionado una familia, se guarda en la sessión el
+ * código de la familia y se redirige al listado productos
+*/
+if (isset($_POST['set_cod_familia'])){
+    $cod_familia = $_POST['cod_familia'];
+    $_SESSION['cod_familia'] = $cod_familia;
+    header('Location:./listado_productos.php');
+}
+
 // Comprobamos si se ha enviado el formulario de vaciar la cesta
 if (isset($_POST['vaciar'])) {
     $cesta_compra->vaciar_cesta();

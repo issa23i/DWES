@@ -72,7 +72,7 @@
             <div id="pie">
                 <p><!-- Migas de pan -->
                     <a href="<?= htmlspecialchars('../controlador/listado_familias.php') ?>">Familias ></a>
-                    <a href="<?= htmlspecialchars("../controlador/listado_productos.php" . "?familia=$cod_familia") ?>"><?= $cod_familia ?> ></a>
+                    <a href="<?= htmlspecialchars("../controlador/listado_productos.php") ?>"><?= $cod_familia ?> ></a>
                 </p>
                 <!-- Cerrar sesión -->
                 <p><a href="<?= htmlspecialchars('../controlador/logout.php') ?>">Cerrar Sesión</a></p> 

@@ -70,7 +70,15 @@
                         <tbody>
     <?php foreach ($listado_familias as $familia): ?>
                                 <tr>
-                                    <td><a href="../controlador/listado_productos.php?familia=<?= $familia->getCod() ?>" target="target"><?= $familia->getNombre() ?></a></td>
+                                    <td>
+                                        <form action="<?= htmlspecialchars($_SERVER['PHP_SELF'])  ?>" method='post'>
+                                            <label for="set_cod_familia"><?= $familia->getNombre()?></label>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="cod_familia" value="<?= $familia->getCod()?>" />
+                                            <input type="submit" name="set_cod_familia" value="Seleccionar" />
+                                        </form>
+                                    </td>
                                 </tr>
     <?php endforeach; ?>
                         </tbody>

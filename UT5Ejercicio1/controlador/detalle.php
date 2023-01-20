@@ -21,8 +21,8 @@ if( !($rol && $rol=='admin') ) {
 }
 
 // Obtener la familia
-if (isset($_REQUEST['familia'])) {
-    $cod_familia = $_REQUEST['familia'];
+if (isset($_SESSION['cod_familia'])) {
+    $cod_familia = $_SESSION['cod_familia'];
 }
 
 if (isset($_POST['detalle'])) {

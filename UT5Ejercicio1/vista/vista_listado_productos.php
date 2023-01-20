@@ -47,7 +47,7 @@
                     </table>
 
 <?php endif; ?>
-                <form id='vaciar' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?vaciar=1&familia=$cod_familia") ?>' method='post'>
+                <form id='vaciar' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?vaciar=1") ?>' method='post'>
                     <input type='submit' name='vaciar' value='Vaciar Cesta'
 <?php if ($cesta_vacia) print "disabled='true'"; ?>
                            />
@@ -90,7 +90,7 @@
                                     <td><?= $producto->mostrar_nombre() ?> </td>
                                     <td><?= $producto->getPVP() ?> </td>
                                     <td>
-                                        <form action='<?= htmlspecialchars("../controlador/detalle.php?familia=$cod_familia") ?>' method='post'>
+                                        <form action='<?= htmlspecialchars("../controlador/detalle.php") ?>' method='post'>
                                             <input type="hidden" name="cod_pro" value="<?= $producto->getCodigo() ?>"/>
                                             <!-- Si no es TV o ORDENA, el botón estará deshabilitado -->
                                             <input type="submit" name='detalle' value="Detalle"
@@ -111,7 +111,7 @@
             <div id="pie">
                 <p><!-- Migas de pan -->
                     <a href="<?= htmlspecialchars('../controlador/listado_familias.php') ?>">Familias ></a>
-                    <a href="<?= htmlspecialchars($_SERVER["PHP_SELF"] . "?familia=$cod_familia") ?>"><?= $cod_familia ?> ></a>
+                    <a href="<?= htmlspecialchars($_SERVER["PHP_SELF"]) ?>"><?= $cod_familia ?> ></a>
                 </p>
                 <!-- Cerrar sesión -->
                 <p><a href="<?= htmlspecialchars('../controlador/logout.php') ?>">Cerrar Sesión</a></p> 

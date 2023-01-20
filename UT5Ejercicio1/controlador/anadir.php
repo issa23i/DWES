@@ -29,6 +29,7 @@ if (isset($_POST['add'])) {
     // obtener el código de familia
     try{
         $cod_familia = $cesta_compra->get_familia($cod);
+        $_SESSION['cod_familia'] = $cod_familia;
     } catch (Exception $ex) {
         echo 'Excepción : ';
         echo $exc->getMessage();
@@ -39,5 +40,5 @@ if (isset($_POST['add'])) {
     
 
     // redirigir a vista listado productos
-    header("Location: ../controlador/listado_productos.php?familia=$cod_familia");
+    header("Location: ../controlador/listado_productos.php");
 }

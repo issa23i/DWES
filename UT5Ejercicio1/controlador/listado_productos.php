@@ -25,8 +25,8 @@ $mensaje_excepcion = '';
 $cod_familia = '';
 
 // Obtener la lista de productos
-if (isset($_REQUEST['familia'])) {
-    $cod_familia = htmlspecialchars($_REQUEST['familia']);
+if (isset($_SESSION['cod_familia'])) {
+    $cod_familia = htmlspecialchars($_SESSION['cod_familia']);
     try {
         $productos = DB::obtiene_productos($cod_familia);
     } catch (Exception $exc) {
