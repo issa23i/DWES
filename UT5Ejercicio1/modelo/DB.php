@@ -96,7 +96,12 @@ class DB {
                 $usuario = $resultado->fetch();
                 $hash = $usuario['password'];
                 $login_ok = password_verify($password, $hash);
-                return $login_ok;
+                if($login_ok){
+                    $rol = $usuario['rol'];
+                    return $rol;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }

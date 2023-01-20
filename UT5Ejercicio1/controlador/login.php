@@ -12,18 +12,16 @@ if (isset($_REQUEST['login'])){
 }
 
 if (isset($_POST['enviar'])) {
-    $flag_nombre = false;
-    $flag_clave = false;
     $nombre_usuario = $_POST['usuario'];
     $clave_usuario = $_POST['password'];
 
     try {
-        if (DB::verifica_cliente($nombre_usuario, $clave_usuario)) {
-
+        $rol = DB::verifica_cliente($nombre_usuario, $clave_usuario);
+        if ($rol) {
             ///// CREAR SESIÓN
             session_start();
             $_SESSION['usuario'] = $nombre_usuario;
-
+            $_SESSION['rol'] = $rol;
             /// REDIRIGIR
             header("Location: ../controlador/listado_familias.php");
         }
@@ -32,10 +30,10 @@ if (isset($_POST['enviar'])) {
     }
 }
 if (isset($nombre_usuario) && isset($clave_usuario)) {
-    // Si falló el login
-    if (!$flag_nombre || !$flag_clave) {
-        $mensaje = 'Usuario o clave incorrecta';
-    } 
+    // Si se enviaron los datos del login,
+    // pero si ha llegado aquí (no ha sido redirigido con header)
+    // muestra que hubo un error en el login
+    $mensaje = 'Usuario o clave incorrecta';
 }
 
 require_once '../vista/vista_login.php';

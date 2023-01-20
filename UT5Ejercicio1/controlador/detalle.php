@@ -10,6 +10,16 @@ comprobar_sesion();
 $cod_familia = '';
 $mensaje_excepcion = '';
 
+// Recoger el rol de la sesión y comprobar si es admin
+$rol = false;
+if(isset($_SESSION['rol'])){
+    $rol = $_SESSION['rol'];
+}
+if( !($rol && $rol=='admin') ) {
+    // si no es admin, no puede ver esta página
+    header('Location: ./listado_familias.php?rol=user');
+}
+
 // Obtener la familia
 if (isset($_REQUEST['familia'])) {
     $cod_familia = $_REQUEST['familia'];

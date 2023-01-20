@@ -5,11 +5,20 @@ require_once '../modelo/DB.php';
 require_once '../modelo/Familia.php';
 require_once '../servicios/funciones.php';
 $mensaje_excepcion = '';
+$mensaje='';
 
 comprobar_sesion();
 
 // Recuperar la cesta de la compra
 $cesta_compra = Cesta_compra::cargar_cesta();
+
+// si viene de la página detalle con rol='user', mostrar mensaje
+if (isset($_GET['rol'])){
+    $rol = $_GET['rol'];
+    if($rol=='user'){
+        $mensaje = 'No tiene permisos para visualizar detalles';
+    }
+}
 
 // Comprobamos si se ha enviado el formulario de vaciar la cesta
 if (isset($_POST['vaciar'])) {
