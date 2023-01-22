@@ -1,0 +1,4 @@
+// CONSTANTES
+const d = document
+
+
