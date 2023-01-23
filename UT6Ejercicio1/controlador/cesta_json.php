@@ -1,3 +1,2 @@
 <?php
-
-echo json_encode($cesta->get_productos(), true);
+echo json_encode($productos_cesta, true);

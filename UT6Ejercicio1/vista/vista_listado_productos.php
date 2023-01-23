@@ -64,7 +64,7 @@
                 // Creamos un formulario por cada producto obtenido
                 if (isset($productos) && count($productos) > 0):
                     ?>
-                    <table class="table">
+                <table class="table">
                         <thead>
                             <tr>
                                 <th>Añadir</th>

@@ -1,22 +1,11 @@
 - Modifica la aplicación de la tienda web desarrollada en unidades
 anteriores para evitar que la página listado_productos.php se recargue
 completamente cada vez que se añade un nuevo producto a la cesta o ésta
-se vacía. El resto de funcionalidades y apariencia de la aplicación se
-mantienen como en la aplicación original.
+se vacía.
 
-- Se deben crear los siguientes ficheros PHP para devolver los datos
-solicitados mediante AJAX:
 
-    - productos_json.php: Devuelve los datos de los productos de una
-    familia en formato JSON. El código de la familia se le pasa en la URL
-    de la petición.
 
-    - cesta_json.php: Devuelve un array JSON con los datos de los productos
-    presentes en la cesta y las unidades pedidas.
 
-- Por otro lado, se debe crear un nuevo fichero con código JS,
-cargarDatos.js, que contiene las funciones necesarias para pedir los
-datos al servidor y modificar la estructura de la página.
 
 - La función cargarProductos() en JS pide los datos al servidor
 (productos_json.php), elimina el contenido de la sección e introduce una tabla
