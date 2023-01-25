@@ -11,10 +11,9 @@
             <div id="encabezado">
                 <h1>Listado de productos</h1>
             </div>
-
             <!-- Dividir en varios templates -->
-            <div id="cesta">      
-                <h3><img src='../images/cesta.png' alt='Cesta' width='24' height='21'> Cesta</h3>
+            <div id="cesta">  
+                          <h3><img src='../images/cesta.png' alt='Cesta' width='24' height='21'> Cesta</h3>
                 <hr />
                 <?php
 // Si la cesta está vacía, mostramos un mensaje
@@ -104,7 +103,7 @@
                         </tbody>
                     </table>
 
-<?php endif; ?>
+<?php endif;                require_once '../controlador/productos_json.php'; ?>
             </div>
 
             <br class="divisor" />
