@@ -88,7 +88,7 @@ const crearFila = (producto) => {
     //crear formulario en cada fila
     //crearFormulario(textoBoton, codProducto, funcion) // la funcion añadir producto
     let codigoProducto = producto.codigo
-    let $tdFormulario = crearFormulario(codigoProducto)
+    let $tdFormulario = crearFormulario('Añadir', codigoProducto, anadirProducto)
     $fila.insertAdjacenteElement('beforeend', $tdFormulario)
     
     // retorna un tr
@@ -96,7 +96,7 @@ const crearFila = (producto) => {
 }
 
 
-const crearFormulario = (codProducto) => {
+const crearFormulario = (textoBtn, codProducto, callback) => {
     
     let $td = d.createElement('td')
     
@@ -114,25 +114,25 @@ const crearFormulario = (codProducto) => {
     let $btn = d.createElement('input')
     $btn.setAttribute('type', 'submit')
     $btn.setAttribute('name', 'add')
-    $btn.setAttribute('value', 'Añadir')
+    $btn.setAttribute('value', textoBtn)
     $formAdd.insertAdjacentElement('beforeend', $btn)
     
-    $form.addEventListener('submit', (ev) => {
+    $form.addEventListener('submit', ev => {
         // evitar que recargue la página
         ev.target.preventDefault()
         
         // recoger unidades
-        let unidades = ev.target.querySelector('[name="unidades"]').value
+        //let unidades = ev.target.querySelector('[name="unidades"]').value
         // let codigo = ev.target.querySelector('[name="unidades"]').dataset.codigo
         // anadirProductos(codigo,unidades)
-        anadirProductos(codProducto, unidades)
+        callback()
     })
     
     return $td
 }
 
-const anadirProductos = (codProducto, unidades) => {
-    
+const anadirProductos = () => {
+    conssole.log('se ha llamado a la función anadirProductos')
 }
 
 const error = (message) => {
