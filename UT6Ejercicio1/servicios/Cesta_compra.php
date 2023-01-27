@@ -1,5 +1,5 @@
 <?php
-
+require_once '../modelo/DB.php';
 /**
  * Description of CESTA_COMPRA
  *
@@ -47,7 +47,7 @@ class Cesta_compra {
         // si ya existe el producto en la cesta, suma las unidades
         if (array_key_exists($cod, $this->cesta)) {
             $unidades_numero = intval($this->cesta[$cod]['unidades']);
-            $unidades_numero += $unidades;
+            $unidades_numero += intval($unidades);
             $this->cesta[$cod]['unidades'] = $unidades_numero;
         } else {
             try {
