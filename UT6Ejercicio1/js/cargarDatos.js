@@ -166,7 +166,7 @@ const anadirProducto = (cod) => {
     $input.value = ''
     let codigo = cod
 
-    // objeto a enviar en el post
+    // objeto a enviar en el post ( formato : "cod=CODIGO&unid=4" )
     let data = "cod=" + codigo + "&unid=" + unidades
 
     // Cestacompra->carga_articulo($cod, $unidades)
@@ -222,7 +222,10 @@ const mostrarCesta = (cesta) => {
     if ($div) {
         $div.remove()
     }
-  
+    let $p = $divCesta.querySelector('p')
+    if($p){
+        $p.remove()
+    }
 
     // el contenido dinámico irá justo después de la etiqueta hr
     let $hr = $divCesta.querySelector('hr')
@@ -237,9 +240,9 @@ const mostrarCesta = (cesta) => {
         $div = d.createElement('div')
         $hr.insertAdjacentElement('afterend', $div)
         
-        $tablaCesta = d.createElement('table')
+        let $tablaCesta = d.createElement('table')
         $tablaCesta.setAttribute('class','table')
-        $divCesta.appendChild($tablaCesta)
+        $div.appendChild($tablaCesta)
 
         let $thead = d.createElement('thead')
         $tablaCesta.appendChild($thead)
@@ -291,7 +294,7 @@ const mostrarCesta = (cesta) => {
         
         // botón comprar
         let $formularioComprar = d.createElement('form')
-        $tablaCesta.insertAdjacentElement('afterend',$formularioComprar)
+        $div.insertAdjacentElement('beforeend',$formularioComprar)
         $formularioComprar.id = 'comprar'
         $formularioComprar.action = "../controlador/cesta.php"
         $formularioComprar.method = 'POST'
@@ -310,7 +313,7 @@ const mostrarCesta = (cesta) => {
         $formularioVaciar.method = 'POST'
         
         let $btnVaciar = d.createElement('input')
-        $formularioVaciar.appendChild($btnComprar)
+        $formularioVaciar.appendChild($btnVaciar)
         $btnVaciar.type = 'submit'
         $btnVaciar.name = 'vaciar'
         $btnVaciar.value = 'Vaciar Cesta'

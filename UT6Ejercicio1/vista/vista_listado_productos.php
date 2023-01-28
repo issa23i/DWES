@@ -15,11 +15,7 @@
                 <h3><img src='../images/cesta.png' alt='Cesta' width='24' height='21'> Cesta</h3>
                 <hr />
                                     
-                <form id='vaciar' action='<?php echo htmlspecialchars($_SERVER["PHP_SELF"] . "?vaciar=1") ?>' method='post'>
-                    <input type='submit' name='vaciar' value='Vaciar Cesta'
-                    <?php if ($cesta_vacia) print "disabled='true'"; ?>
-                           />
-                </form>
+                
             </div>
 
             <div id="productos">
