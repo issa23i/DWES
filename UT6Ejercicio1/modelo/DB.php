@@ -1,6 +1,5 @@
 <?php
 
-include_once '../controlador/constantes.php';
 include_once 'Familia.php';
 include_once 'Producto.php';
 include_once 'Sobremesa.php';
@@ -11,12 +10,16 @@ include_once 'Sobremesa.php';
  * @author ipaslop262
  */
 class DB {
+    
+    private static $USUARIO_DB = 'dwes2';
+    private static $PASSWORD_DB = 'abc123.';
+    private static $DSN = 'mysql:host=localhost;dbname=dwes2';
 
     protected static function ejecuta_consulta() {
         $num_argumentos = func_num_args();
         if ($num_argumentos == 2) {
             try {
-                $pdo = new PDO(DSN, USUARIO_DB, PASSWORD_DB);
+                $pdo = new PDO(self::$DSN, self::$USUARIO_DB, self::$PASSWORD_DB);
                 $resultado = $pdo->prepare(func_get_arg(0));
                 $resultado->execute(func_get_arg(1));
                 return $resultado;
@@ -25,7 +28,7 @@ class DB {
             }
         } elseif ($num_argumentos == 1){
             try {
-                $pdo = new PDO(DSN, USUARIO_DB, PASSWORD_DB);
+                $pdo = new PDO(self::$DSN, self::$USUARIO_DB, self::$PASSWORD_DB);
                 $resultado = $pdo->query(func_get_arg(0));
                 return $resultado;
             } catch (Exception $ex) {

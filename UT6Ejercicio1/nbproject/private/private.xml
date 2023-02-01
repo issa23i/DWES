@@ -3,19 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/controlador/anadir.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/controlador/productos_json.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/controlador/cesta_json.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/controlador/listado_productos.php</file>
+            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/1_To_Do</file>
             <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/modelo/DB.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/0_Enunciado</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/controlador/constantes.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/modelo/Televisor.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/controlador/anadir_json.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/modelo/Producto.php</file>
+            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/servicios/Cesta_compra.php</file>
             <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/js/cargarDatos.js</file>
             <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/vista/vista_listado_productos.php</file>
-            <file>file:/home/ipaslop262/NetBeansProjects/DWES/UT6Ejercicio1/modelo/Sobremesa.php</file>
         </group>
     </open-files>
 </project-private>

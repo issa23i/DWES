@@ -29,10 +29,23 @@ class Producto implements JsonSerializable {
         return $this->codigo;
     }
 
-    public function getPVP() {
-        return intval($this->PVP);
+    public function getNombre_corto() {
+        return $this->nombre_corto;
     }
 
+    public function getPVP() {
+        return $this->PVP;
+    }
+
+    public function setNombre_corto($nombre_corto): void {
+        $this->nombre_corto = $nombre_corto;
+    }
+
+    public function setPVP($PVP): void {
+        $this->PVP = $PVP;
+    }
+
+    
     public function getDescripcion() {
         return $this->descripcion;
     }
