@@ -8,28 +8,8 @@ window.addEventListener('load', () => {
     cargarCesta()
 })
 
-/***/
-
 
 // FUNCIONES
-/**
- const cargarProductos = async () => {
- let ruta = '../controlador/productos_json.php'
- try{
- let respuesta = await fetch(ruta)
- let respuestaOk = await respuesta.ok
- if (respuestaOk) {
- let productos = await respuesta.json()
- }
- 
- } catch (err) {
- console.error('No se obtuvo respuesta de '+ ruta + ' ' + err )
- }
- // para que no se siga el link que llama a esta funciónn
- return false;
- }*/
-
-
 const cargarProductos = () => {
     let xhr = new XMLHttpRequest()
     let productos = ''
@@ -192,6 +172,32 @@ const anadirProducto = (cod) => {
     cargarCesta()
 }
 
+const eliminarProducto = (cod) => {
+    
+    // objeto a enviar en el post ( formato : "cod=CODIGO" )
+    let data = "cod=" + cod
+    // hacer una petición POST
+    let xhr = new XMLHttpRequest()
+
+    xhr.addEventListener('readystatechange', e => {
+        // continuar hasta que readyState sea 4
+        if (xhr.readyState !== 4)
+            return
+        // si código éxito 200 - 299
+        if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.responseText)
+        } else {
+            let message = xhr.statusText || "Ocurrió un error"
+            error(message) // hacer algo con el error
+        }
+    })
+    xhr.open('POST', '../controlador/eliminar_json.php', true)
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8')
+    xhr.send(data)
+
+    cargarCesta()
+}
+
 const cargarCesta = () => {
 
     let xhr = new XMLHttpRequest()
@@ -266,6 +272,12 @@ const mostrarCesta = (cesta) => {
         $tdCabeceraUnidades.textContent = 'Unidades'
         $trCabecera.appendChild($tdCabeceraUnidades)
         
+        // añadir columna para botón eliminar
+        let $tdCabeceraEliminar = d.createElement('td')
+        $tdCabeceraEliminar.textContent = 'Eliminar'
+        $trCabecera.appendChild($tdCabeceraEliminar)
+        
+        
         let $tbody = d.createElement('tbody')
         $thead.insertAdjacentElement('afterend',$tbody)
         
@@ -290,6 +302,29 @@ const mostrarCesta = (cesta) => {
             let $tdUnidadesProducto = d.createElement('td')
             $tdUnidadesProducto.textContent = value.unidades
             $trProducto.insertAdjacentElement('beforeend', $tdUnidadesProducto)
+            
+            let $tdEliminarProducto = d.createElement('td')
+            $trProducto.insertAdjacentElement('beforeend', $tdEliminarProducto)
+            
+            // botón eliminar
+            let $formularioEliminar = d.createElement('form')
+            $formularioEliminar.id = 'eliminar'
+            $formularioEliminar.method = 'POST'
+            $tdEliminarProducto.insertAdjacentElement('beforeend', $formularioEliminar)
+            
+            let $btnEliminar = d.createElement('input')
+            $formularioEliminar.appendChild($btnEliminar)
+            $btnEliminar.type = 'submit'
+            $btnEliminar.id = 'erase'
+            $btnEliminar.name = value.producto.codigo
+            $btnEliminar.value = 'Eliminar'
+            
+            $formularioEliminar.addEventListener('submit', ev => {
+                // evitar que recargue la página
+                ev.preventDefault()
+                eliminarProducto(value.producto.codigo)
+            })
+            
         })
         
         // botón comprar

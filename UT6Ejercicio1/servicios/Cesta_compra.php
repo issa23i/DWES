@@ -118,7 +118,7 @@ class Cesta_compra {
      * elimina la entrada del array cesta
      * @param type string
      */
-    public static function eliminar_producto($cod) {
+    public function eliminar_producto($cod) {
         // comprobar que el producto existe en la cesta
         if (array_key_exists($cod, $this->cesta)) {
             $unidades = intval($this->cesta[$cod]['unidades']);
@@ -126,7 +126,7 @@ class Cesta_compra {
             if ($unidades <= 1) {
                 unset($this->cesta[$cod]);
             } else {
-                $cesta[$cod]['unidades'] = intval($this->cesta[$cod]['unidades']) - 1;
+                $this->cesta[$cod]['unidades'] = intval($this->cesta[$cod]['unidades']) - 1;
             }
         }
     }
