@@ -1,0 +1,98 @@
+SYMFONY
+symfony server:start -d
+
+df -h
+sudo apt update
+sudo apt upgrade --yes
+sudo apt-get dist-upgrade --yes
+sudo do-release-upgrade
+sudo apt install composer
+which composer
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
+lsb_release -a
+sudo apt-get dist-upgrade --yes
+sudo do-release-upgrade
+sudo /etc/init.d/networking start
+swapinfo
+wget https://get.symfony.com/cli/installer -O - | bash
+sudo mv /home/ipaslop262/.symfony5/bin/symfony /usr/local/bin/symfony
+composer -V
+ which composer
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+sudo php composer-setup.php --install-dir=/usr/bin --filename=composer
+sudo apt-get install libnss3-tools
+php -v
+composer -V
+sudo apt update
+sudo apt upgrade
+sudo apt install php7.2
+symfony book:check-requirements
+sudo a2ensite disable
+composer create-project symfony/website-skeleton ipaslo
+sudo apt-get install libnss3-tools
+symfony new --full proyectoisa
+
+symfony server:ca:install
+
+symfony server:start --port=8082
+
+composer require symfony/orm-pack
+composer require --dev symfony/maker-bundle
+php bin/console doctrine:database:create
+sudo apt install php-mysql
+sync-metadata-storage
+php bin/console doctrine:migration:sync-metadata-storage
+composer require symfony/security-bundle
+bin/console make:user
+bin/console make:entity
+ls migrations
+ php bin/console doctrine:migrations:diff
+ php bin/console doctrine:migrations:migrate
+php bin/console security:hash-password
+php bin/console make:controller Login
+php bin/console make:auth
+php bin/console debug:router
+
+symfony server:start -d
+
+php bin/console make:controller IsaBase
+php bin/console --version
+php bin/console make:controller PedidosBase
+
+
+
+
+APACHE2
+sudo service apache2 start
+
+XAMPP
+sudo /opt/lampp/lampp start
+
+MYSQL
+mysql -h 127.0.0.1 -u dwes -p      
+contraseña abc123.
+
+mysql -P 3306 -h 127.0.0.1 -u -prootroot
+
+INTERFACES (/etc/network/interfaces)
+sudo ifdown ens18:0
+sudo ifup ens18:0
+
+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
+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
+
+git add .
+git commit -m "comentario"
+git push origin main
+
+bajar cambios de github a remoto
+git pull
+
+si hay cambios en local, pero no los quiero
+gti fetch
+git reset --hard HEAD
+git merge '@{u}'
+git pull
+
+https://blog.desdelinux.net/guia-rapida-para-utilizar-github/
